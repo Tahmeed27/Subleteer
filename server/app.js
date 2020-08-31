@@ -40,7 +40,7 @@ app.use((error, req, res, next) => {
 
 
 mongoose.connect(
-    'mongodb+srv://dot:dotProjects@cluster0.q0xkz.mongodb.net/listings?retryWrites=true&w=majority', 
+    'mongodb+srv://dotWaterloo:dotProjects@cluster0.j86my.mongodb.net/listings?retryWrites=true&w=majority', 
     { useNewUrlParser: true , useUnifiedTopology: true })
 .then(() => {
     app.listen(5000);
