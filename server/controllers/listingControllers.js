@@ -1,11 +1,20 @@
 const HttpError = require('../models/http-error');
 const Listing = require('../models/listing');
 
+const getCoordinatesFromAddress = require('../util/location');
 
 const createListing = async (req, res, next) => {
     const {title, bedrooms, 
         price, gender, address,
         bathrooms, image, creator, description } = req.body;
+
+    let coordinates;
+    try{
+        coordinates = await getCoordinatesFromAddress(address);
+    }catch(error){
+        console.log(error);
+        return next(error);
+    }
 
     const newListing = new Listing({
         title, 
@@ -13,6 +22,7 @@ const createListing = async (req, res, next) => {
         price, 
         gender, 
         address,  
+        location: coordinates,
         bathrooms, 
         image, 
         creator, 
