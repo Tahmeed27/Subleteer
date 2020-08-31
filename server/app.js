@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const HttpError = require('./models/http-error');
 const listingRoutes = require('./routes/listingRoutes');
@@ -37,4 +38,13 @@ app.use((error, req, res, next) => {
     res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-app.listen(5000);
+
+mongoose.connect(
+    'mongodb+srv://dot:dotProjects@cluster0.q0xkz.mongodb.net/listings?retryWrites=true&w=majority', 
+    { useNewUrlParser: true , useUnifiedTopology: true })
+.then(() => {
+    app.listen(5000);
+})
+.catch( err => {
+    console.log(err);
+});
