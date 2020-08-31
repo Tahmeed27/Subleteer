@@ -8,10 +8,10 @@ const listingSchema = new Schema({
     price: {type: Number, required: true}, //Monthly rent 
     gender: {type: String, required: true}, // "Female only" || "Male only" || "any"
     address: {type: String, required: true}, // String address to display in listing
-    location: { 
+    /*location: { 
         lat: {type: Number, required: true}, //Latitude for listing recommendations
         lng: {type: Number, required: true} // Longitude for listing recommendations
-    },
+    },*/
     bathrooms: {type: String, required: true}, // Number of bathrooms available
     image: {type: String, required: true}, // ImageURL of the sublet (1 image for now)
     creator: {type: String, required: true}, // User who created it (will change to user Model later)

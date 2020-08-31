@@ -1,8 +1,32 @@
-//const HttpError = require('../models/http-error');
+const HttpError = require('../models/http-error');
+const Listing = require('../models/listing');
+
 
 const createListing = async (req, res, next) => {
+    const {title, bedrooms, 
+        price, gender, address,
+        bathrooms, image, creator, description } = req.body;
 
-    res.json({message: "successful connection for creating a new listing"});
+    const newListing = new Listing({
+        title, 
+        bedrooms, 
+        price, 
+        gender, 
+        address,  
+        bathrooms, 
+        image, 
+        creator, 
+        description 
+    });
+
+    try{
+        await newListing.save();
+    }catch(error){
+        const err = new HttpError(error, 500);
+        return next(err);
+    }
+
+    res.status(201).json({newListing});
 };
 
 const getListingsByAddress = async (req, res, next) => {
