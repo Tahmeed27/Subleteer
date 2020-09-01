@@ -6,8 +6,7 @@ const API_KEY = 'AIzaSyAK3e6tBbLsOOe_kMsoTrAUdJuFvj1cVfY';
 
 async function getCoordinatesForAddress(address) {
 
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?
-    address=${encodeURIComponent(address)}&key=${API_KEY}`);
+    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`);
     
     const data = response.data;
 
