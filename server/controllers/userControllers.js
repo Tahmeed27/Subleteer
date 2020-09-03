@@ -1,3 +1,5 @@
+const User = require('../models/user');
+
 
 const signup = async (req, res, next) => {
     res.json({message: "Successful connection to signup new user"});
