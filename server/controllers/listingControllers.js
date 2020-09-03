@@ -51,7 +51,52 @@ const getListingsByFilters = async (req, res, next) => {
 
 const updateListing = async (req, res, next) => {
     
-    res.json({message: "Successful connection for updating listings"});
+    const {title, bedrooms, price, 
+        gender, bathrooms, image, 
+        description} = req.body;
+    const listingID = req.params.lid;
+
+    let listing;
+
+    try{
+        listing = await Listing.findById(listingID);
+    }
+    catch(error){
+        const err = new HttpError("Something went wrong, couldn't update listing", 500);
+        return next(err);
+    }
+
+    if(title !== null){
+        listing.title = title;
+    }
+    if(bedrooms !== null){
+        listing.bedrooms = bedrooms;
+    }
+    if(price !== null){
+        listing.price = price;
+    }
+    if(gender !== null){
+        listing.gender = gender;
+    }
+    if(bathrooms !== null){
+        listing.bathrooms = bathrooms;
+    }
+    if(image !== null){
+        listing.image = image;
+    }
+    if(description !== null){
+        listing.description = description;
+    }
+    
+
+    try{
+        await listing.save();
+    }catch(error){
+        const err = new HttpError(error, 500);
+        return next(err);
+    }
+
+    res.status(201).json({listing: listing.toObject({getters: true})});
 };
 
 const deleteListing = async (req, res, next) => {
