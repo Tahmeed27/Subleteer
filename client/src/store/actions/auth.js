@@ -70,6 +70,13 @@ export const auth = (email, password, username, isSignup) => {
   };
 };
 
+export const setAuthRedirectedPath = (path) => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path,
+  };
+};
+
 export const authCheckState = () => {
   return (dispatch) => {
     const token = localStorage.getItem("token");
