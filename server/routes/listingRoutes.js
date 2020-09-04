@@ -5,7 +5,7 @@ const listingControllers = require('../controllers/listingControllers');
 
 const router = express.Router();
 
-router.get('/:address', listingControllers.getListingsByAddress);
+router.post('/', listingControllers.getListingsByAddress);
 
 router.post(
     '/filters', 
