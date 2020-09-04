@@ -3,9 +3,6 @@ const User = require('../models/user');
 
 
 const signup = async (req, res, next) => {
-  //  res.json({message: "Successful connection to signup user"});
-
-
     let user = new User({
         username: req.body.username,
         email: req.body.email,
