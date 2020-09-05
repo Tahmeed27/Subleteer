@@ -22,7 +22,10 @@ const createListing = async (req, res, next) => {
         price, 
         gender, 
         address,  
-        location: coordinates,
+        location: {
+            type: "Point",
+            coordinates: [coordinates.lng, coordinates.lat]
+        },
         bathrooms, 
         image, 
         creator, 
@@ -40,8 +43,29 @@ const createListing = async (req, res, next) => {
 };
 
 const getListingsByAddress = async (req, res, next) => {
+    const {address} = req.body;
 
-    res.json({message: "successful connection for getting listings by address"});
+    let coordinates;
+    try{
+        coordinates = await getCoordinatesFromAddress(address);
+    }catch(error){
+        console.log(error);
+        return next(error);
+    }
+
+    const listings = await Listing.find({
+        location: {
+            $near: {
+                $maxDistance: 1000,
+                $geometry: {
+                    type: "Point",
+                    coordinates: [coordinates.lng, coordinates.lat]
+                }
+            }
+        }
+    });
+    
+    res.json({message: "successful connection for getting listings by address", listings: listings});
 };
 
 const getListingsByFilters = async (req, res, next) => {
