@@ -41,7 +41,7 @@ app.use((error, req, res, next) => {
 
 mongoose.connect(
     'mongodb+srv://dotWaterloo:dotProjects@cluster0.j86my.mongodb.net/listings?retryWrites=true&w=majority', 
-    { useNewUrlParser: true , useUnifiedTopology: true })
+    { useNewUrlParser: true , useUnifiedTopology: true, useCreateIndex:true, })
 .then(() => {
     app.listen(5000);
 })
