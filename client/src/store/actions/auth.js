@@ -66,16 +66,16 @@ export const auth = (email, password, isSignup, username = null) => {
       .then((response) => {
         console.log(response);
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-        // localStorage.setItem(response.data.idToken);
-        localStorage.setItem("tokenId", "token");
+        
+        localStorage.setItem("token", response.data.token);
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", response.data._id);
-        // dispatch(authSuccess(response.data.idToken, response.data._id));
+        dispatch(authSuccess(response.data.token, response.data._id));
         dispatch(
           authSuccess(
-            response.data.user.token,
-            response.data.user_id,
-            response.data.user.username
+            response.data.token,
+            response.data._id,
+            response.data.username,
           )
         );
         dispatch(checkAuthTimeout(3600));
@@ -83,7 +83,7 @@ export const auth = (email, password, isSignup, username = null) => {
       })
       .catch((err) => {
         console.log(err);
-        // dispatch(authFail(err.response.data.user.error));
+        dispatch(authFail(err));
       });
   };
 };
