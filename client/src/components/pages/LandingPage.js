@@ -6,6 +6,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
 import LandingCard from "../LandingCard";
+import Footer from '../UI/Footer/Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -160,6 +161,7 @@ const LandingPage = () => {
           <LandingCard />
           <LandingCard />
         </div>
+        <Footer/>
       </div>
     </div>
   );
