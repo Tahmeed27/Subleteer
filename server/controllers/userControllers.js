@@ -15,16 +15,37 @@ const signup = async (req, res, next) => {
         password: hashPassword
     })
 
-    user.save()
-    .then(() => {
-        res.status(201).json({user});
-    })
-    .catch(error => {
-        const err = new HttpError(error, 500);
-        return next(err);
-    })
-};
+    try {
+      await user.save();
+    } catch (err) {
+      const error = new HttpError(
+        'Signing up failed, please try again later.',
+        500
+      );
+      return next(error);
+    }
+  
+    let token;
+    try {
+      token = jwt.sign(
+        { userId: user._id, email: user.email },
+        'supersecret_dont_share',
+        { expiresIn: '1h' }
+      );
+    } catch (err) {
+      const error = new HttpError(
+        'Signing up failed, please try again later.',
+        500
+      );
+      return next(error);
+    }
+  
+    res
+      .status(201)
+      .json({ userId: user._id, email: user.email, token: token });
+  };
 
+    
 const login = async (req, res, next) => {
     const { email, password } = req.body;
 
@@ -72,7 +93,7 @@ const login = async (req, res, next) => {
     let token;
     try {
       token = jwt.sign(
-        { userId: existingUser.id, email: existingUser.email },
+        { userId: existingUser._id, email: existingUser.email },
         'supersecret_dont_share',
         { expiresIn: '1h' }
       );
