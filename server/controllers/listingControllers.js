@@ -77,8 +77,7 @@ const updateListing = async (req, res, next) => {
     
     const {title, bedrooms, price, 
         gender, bathrooms, image, 
-        description} = req.body;
-    const listingID = req.params.lid;
+        description, listingID} = req.body;
 
     let listing;
 
