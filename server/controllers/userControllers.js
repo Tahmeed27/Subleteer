@@ -1,12 +1,18 @@
 const HttpError = require('../models/http-error');
 const User = require('../models/user');
-
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const signup = async (req, res, next) => {
-    let user = new User({
+  //  res.json({message: "Successful connection to signup user"});
+
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.password, salt)
+
+    const user = new User({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: hashPassword
     })
 
     user.save()
@@ -43,7 +49,7 @@ const login = async (req, res, next) => {
     }
   
     let isValidPassword = false;
-    /*
+    
     try {
       isValidPassword = await bcrypt.compare(password, existingUser.password);
     } catch (err) {
@@ -53,10 +59,7 @@ const login = async (req, res, next) => {
       );
       return next(error);
     }
-    */
-
-    if (password == existingUser.password) isValidPassword = true;
-  
+      
     if (!isValidPassword) {
       const error = new HttpError(
         'Invalid credentials, could not log you in.',
@@ -65,7 +68,7 @@ const login = async (req, res, next) => {
       return next(error);
     }
     
-    /*
+    
     let token;
     try {
       token = jwt.sign(
@@ -80,12 +83,12 @@ const login = async (req, res, next) => {
       );
       return next(error);
     }
-    */
+    
   
     res.json({
       userId: existingUser._id,
       email: existingUser.email,
-      //token: token
+      token: token
     });
   
 
