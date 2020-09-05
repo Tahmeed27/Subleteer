@@ -86,7 +86,81 @@ const getListingsByAddress = async (req, res, next) => {
 
 const getListingsByFilters = async (req, res, next) => {
 
-    res.json({message: "Successful connection for getting listings by filters"});
+    const {address, price, bedrooms, gender} = req.body;
+
+    let coordinates;
+    try{
+        coordinates = await getCoordinatesFromAddress(address);
+    }catch(error){
+        console.log(error);
+        return next(error);
+    }
+
+    const Filters = [
+        {
+          name: "price", 
+          val: price
+        },
+        {
+          name: "bedrooms",
+          val: bedrooms
+        },
+        {
+          name: "gender",
+          val: gender
+        }
+      ];
+
+    const query = {
+        $and : [
+            {
+                location: {
+                    $near: {
+                        $maxDistance: 1000,
+                        $geometry: {
+                            type: "Point",
+                            coordinates: [coordinates.lng, coordinates.lat]
+                        }
+                    }
+                }
+            }
+        ]
+    }   
+
+    const filterOptions = {
+      "price": {
+                    price: {
+                        $lte: price
+                    }
+                },
+      "bedrooms": {
+                    bedrooms: {
+                        $eq: bedrooms
+                    }
+                },
+      "gender": {
+                    gender: {
+                        $eq: gender
+                    }
+                }
+    }
+
+    Filters.forEach(filter => {
+          if(filter.val !== null ){
+              const name = filter.name;
+              query.$and.push(filterOptions[filter.name]);
+          }
+      });
+
+    let listings = [];
+    try{
+        listings = await Listing.find(query);
+    }catch(error){
+        const err = new HttpError("Couldn't find any listings", 500);
+        return next(err);
+    }
+
+    res.json({listings});
 };
 
 const updateListing = async (req, res, next) => {
@@ -127,7 +201,6 @@ const updateListing = async (req, res, next) => {
         listing.description = description;
     }
     
-
     try{
         await listing.save();
     }catch(error){

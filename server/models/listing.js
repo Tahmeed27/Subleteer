@@ -13,7 +13,7 @@ const listingSchema = new Schema({
         type: { type: String },
         coordinates: []
     },
-    bathrooms: {type: String, required: true}, // Number of bathrooms available
+    bathrooms: {type: Number, required: true}, // Number of bathrooms available
     image: {type: String, required: true}, // ImageURL of the sublet (1 image for now)
     userID: {type: mongoose.Types.ObjectId, required: true, ref: 'User'}, // User who created it
     description: {type: String, required: true} //Other descriptions like facilities etc.
