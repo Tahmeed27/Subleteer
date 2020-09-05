@@ -14,7 +14,7 @@ export const authSuccess = (token, userId, username) => {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId: userId,
-    username: username
+    username: username,
   };
 };
 
@@ -42,20 +42,20 @@ export const checkAuthTimeout = (expirationTime) => {
   };
 };
 
-export const auth = (email, password, isSignup, username=null) => {
+export const auth = (email, password, isSignup, username = null) => {
   return (dispatch) => {
     console.log(isSignup);
     dispatch(authStart());
     let authData = {
       email: email,
       password: password,
-      username: username
-    }
-    if (!isSignup) ( 
+      username: username,
+    };
+    if (!isSignup)
       authData = {
-      email: email,
-      password: password,
-    });
+        email: email,
+        password: password,
+      };
     let url = "http://localhost:5000/api/users/signup";
     if (!isSignup) {
       url = "http://localhost:5000/api/users/login";
@@ -69,15 +69,21 @@ export const auth = (email, password, isSignup, username=null) => {
         // localStorage.setItem(response.data.idToken);
         localStorage.setItem("tokenId", "token");
         localStorage.setItem("expirationDate", expirationDate);
-        localStorage.setItem("userId", response.data.user._id);
+        localStorage.setItem("userId", response.data._id);
         // dispatch(authSuccess(response.data.idToken, response.data._id));
-        dispatch(authSuccess(response.data.user.token, response.data.user_id, response.data.user.username));
+        dispatch(
+          authSuccess(
+            response.data.user.token,
+            response.data.user_id,
+            response.data.user.username
+          )
+        );
         dispatch(checkAuthTimeout(3600));
         console.log(response);
       })
       .catch((err) => {
         console.log(err);
-        dispatch(authFail(err.response.data.user.error));
+        // dispatch(authFail(err.response.data.user.error));
       });
   };
 };
