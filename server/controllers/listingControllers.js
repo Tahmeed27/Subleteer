@@ -1,12 +1,13 @@
 const HttpError = require('../models/http-error');
 const Listing = require('../models/listing');
-
+const User = require('../models/user');
 const getCoordinatesFromAddress = require('../util/location');
+const ObjectId = require('mongodb').ObjectID;
 
 const createListing = async (req, res, next) => {
     const {title, bedrooms, 
         price, gender, address,
-        bathrooms, image, creator, description } = req.body;
+        bathrooms, image, userID, description } = req.body;
 
     let coordinates;
     try{
@@ -28,9 +29,24 @@ const createListing = async (req, res, next) => {
         },
         bathrooms, 
         image, 
-        creator, 
+        userID : ObjectId(userID), 
         description 
     });
+
+    let user;
+
+    try{
+        user = await User.find(ObjectId(userID));
+    }catch(error){
+        console.log(error);
+        const err = new HttpError("Couldn't create listing, please try again later", 500);
+        return next(err);
+    }
+
+    if(!user){
+        const err = new HttpError("User doesn't exist, couldn't create listing", 404);
+        return next(err);
+    }
 
     try{
         await newListing.save();
