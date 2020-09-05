@@ -6,6 +6,17 @@ const jwt = require('jsonwebtoken')
 const signup = async (req, res, next) => {
   //  res.json({message: "Successful connection to signup user"});
 
+  let existingUser;
+  existingUser = await User.findOne({ email: req.body.email });
+     
+  if (existingUser) {
+    const error = new HttpError(
+      'There is already an account with this email',
+      403
+    );
+    return next(error);
+  }
+
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt)
 
@@ -19,7 +30,7 @@ const signup = async (req, res, next) => {
       await user.save();
     } catch (err) {
       const error = new HttpError(
-        'Signing up failed, please try again later.',
+        'Sign up failed, please try again later.',
         500
       );
       return next(error);
@@ -34,7 +45,7 @@ const signup = async (req, res, next) => {
       );
     } catch (err) {
       const error = new HttpError(
-        'Signing up failed, please try again later.',
+        'Sign up failed, please try again later.',
         500
       );
       return next(error);
@@ -50,20 +61,12 @@ const login = async (req, res, next) => {
     const { email, password } = req.body;
 
     let existingUser;
-  
-    try {
-      existingUser = await User.findOne({ email: email });
-    } catch (err) {
-      const error = new HttpError(
-        'Logging in failed, please try again later.',
-        500
-      );
-      return next(error);
-    }
-  
+    existingUser = await User.findOne({ email: email });
+   
+     
     if (!existingUser) {
       const error = new HttpError(
-        'Invalid credentials, could not log you in.',
+        'No account exists with this email',
         403
       );
       return next(error);
@@ -71,19 +74,11 @@ const login = async (req, res, next) => {
   
     let isValidPassword = false;
     
-    try {
-      isValidPassword = await bcrypt.compare(password, existingUser.password);
-    } catch (err) {
-      const error = new HttpError(
-        'Could not log you in, please check your credentials and try again.',
-        500
-      );
-      return next(error);
-    }
+    isValidPassword = await bcrypt.compare(password, existingUser.password);
       
     if (!isValidPassword) {
       const error = new HttpError(
-        'Invalid credentials, could not log you in.',
+        'Incorrect credentials, could not log you in.',
         403
       );
       return next(error);
