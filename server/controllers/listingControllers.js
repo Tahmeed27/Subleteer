@@ -125,7 +125,25 @@ const updateListing = async (req, res, next) => {
 
 const deleteListing = async (req, res, next) => {
 
-    res.json({message: "Successful connection for deleting listings"});
+    const {listingID} = req.body;
+
+    let listing; 
+    try{
+        listing = await Listing.findById(listingID);
+    }
+    catch(error){
+        const err = new HttpError("Something went wrong, couldn't delete listing", 500);
+        return next(err);
+    }
+
+    try{
+        await listing.remove();
+    }catch(error){
+        const err = new HttpError("Something went wrong, couldn't delete listing", 500);
+        return next(err);
+    }
+
+    res.json({message: "Deleted listing"});
 };
 
 exports.createListing = createListing;
