@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
@@ -108,8 +110,28 @@ const LandingPage = () => {
         <div className={classes.navbar}>
           <div>Logo</div>
           <div className={classes.links}>
-            <div className={classes.linkText}>Sign Up</div>
-            <div className={classes.linkText}>Login</div>
+            <NavLink
+              to="/signup"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <div
+                className={classes.linkText}
+                activeClassName={classes.linkText}
+              >
+                Sign Up
+              </div>
+            </NavLink>
+            <NavLink
+              to="/login"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <div
+                className={classes.linkText}
+                activeClassName={classes.linkText}
+              >
+                LogIn
+              </div>
+            </NavLink>
           </div>
         </div>
         <div className={classes.centerDiv}>
@@ -144,4 +166,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-

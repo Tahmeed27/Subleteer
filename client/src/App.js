@@ -15,7 +15,15 @@ const App = (props) => {
 
   let routes = (
     <Switch>
-      <Route path="/auth" render={(props) => <Auth {...props} />} />
+      <Route
+        path="/login"
+        render={(props) => <Auth {...props} isSignUp={false} />}
+      />
+      <Route
+        path="/signup"
+        render={(props) => <Auth {...props} isSignUp={true} />}
+      />
+      <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />
     </Switch>
   );
@@ -23,17 +31,21 @@ const App = (props) => {
   if (props.isAuthenticated) {
     routes = (
       <Switch>
-        <Route path="/auth" render={(props) => <Auth {...props} />} />
+        <Route
+          path="/login"
+          render={(props) => <Auth {...props} isSignUp={false} />}
+        />
+        <Route
+          path="/signup"
+          render={(props) => <Auth {...props} isSignUp={true} />}
+        />
+        <Route path="/" exact component={LandingPage} />
         <Redirect to="/" />
       </Switch>
     );
   }
 
-  return (
-    <div className="App">
-      <LandingPage />
-    </div>
-  );
+  return <div className="App">{routes}</div>;
 };
 
 const mapStateToProps = (state) => {
