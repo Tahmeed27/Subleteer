@@ -36,7 +36,7 @@ const createListing = async (req, res, next) => {
         return next(err);
     }
 
-    res.status(201).json({newListing});
+    res.status(201).json({newListing, message: "Success! Listing created."});
 };
 
 const getListingsByAddress = async (req, res, next) => {
