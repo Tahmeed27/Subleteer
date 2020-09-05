@@ -12,6 +12,7 @@ import classes from "./Auth.module.css";
 const Auth = (props) => {
   const [authForm, setAuthForm] = useState({
     email: {
+      login: true,
       elementType: "input",
       elementConfig: {
         type: "email",
@@ -26,6 +27,7 @@ const Auth = (props) => {
       touched: false,
     },
     password: {
+      login: true,
       elementType: "input",
       elementConfig: {
         type: "password",
@@ -39,13 +41,14 @@ const Auth = (props) => {
       valid: false,
       touched: false,
     },
-    // username: {
-    //   elementType: "input",
-    //   elementConfig: {
-    //     type: "text",
-    //     placeholder: "Username",
-    //   },
-    // },
+    username: {
+      login: false,
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Username",
+      },
+    },
   });
 
   const { authRedirectPath } = props;
@@ -67,15 +70,30 @@ const Auth = (props) => {
   const submitHandler = (event) => {
     console.log("submitted");
     event.preventDefault();
-    props.onAuth(authForm.email.value, authForm.password.value, props.isSignup);
+    props.onAuth(authForm.email.value, authForm.password.value, props.isSignUp, authForm.username.value);
   };
 
-  const formElementArray = [];
+  const signupArray = [];
   for (let key in authForm) {
-    formElementArray.push({
+    signupArray.push({
       id: key,
       config: authForm[key],
     });
+  }
+
+  const loginArray = [];
+  for (let key in authForm) {
+    if(authForm[key].login) {
+    loginArray.push({
+      id: key,
+      config: authForm[key],
+    });
+    }
+  }
+
+  let formElementArray = signupArray;
+  if (!props.isSignUp) {
+    formElementArray = loginArray;
   }
 
   let form = formElementArray.map((formElement) => (

@@ -1,18 +1,20 @@
 import axios from "axios";
 
 import * as actionTypes from "./actionTypes";
-
+//@TODO
+//add username in state
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, username) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     idToken: token,
     userId: userId,
+    username: username
   };
 };
 
@@ -40,31 +42,42 @@ export const checkAuthTimeout = (expirationTime) => {
   };
 };
 
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password, isSignup, username=null) => {
   return (dispatch) => {
+    console.log(isSignup);
     dispatch(authStart());
-    const authData = {
+    let authData = {
       email: email,
       password: password,
-    };
+      username: username
+    }
+    if (!isSignup) ( 
+      authData = {
+      email: email,
+      password: password,
+    });
     let url = "http://localhost:5000/api/users/signup";
     if (!isSignup) {
       url = "http://localhost:5000/api/users/login";
     }
+    console.log(url);
     axios
       .post(url, authData)
       .then((response) => {
+        console.log(response);
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
         // localStorage.setItem(response.data.idToken);
-        localStorage.setItem("token");
+        localStorage.setItem("tokenId", "token");
         localStorage.setItem("expirationDate", expirationDate);
-        localStorage.setItem("userId", response.data._id);
+        localStorage.setItem("userId", response.data.user._id);
         // dispatch(authSuccess(response.data.idToken, response.data._id));
-        dispatch(authSuccess("token", response.data._id));
+        dispatch(authSuccess(response.data.user.token, response.data.user_id, response.data.user.username));
         dispatch(checkAuthTimeout(3600));
+        console.log(response);
       })
       .catch((err) => {
-        dispatch(authFail(err.response.data.error));
+        console.log(err);
+        dispatch(authFail(err.response.data.user.error));
       });
   };
 };
