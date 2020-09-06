@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 
 import * as actions from "../../store/actions/index";
 import { updateObject, checkValidity } from "../../shared/utility";
@@ -8,6 +8,7 @@ import Input from "../UI/Input/Input";
 import Spinner from "../UI/Spinner/Spinner";
 import Button from "../UI/Button/Button";
 import classes from "./Auth.module.css";
+import Graphic from '../res/Login Graphic.png';
 
 const Auth = (props) => {
   const [authForm, setAuthForm] = useState({
@@ -16,7 +17,7 @@ const Auth = (props) => {
       elementType: "input",
       elementConfig: {
         type: "email",
-        placeholder: "Mail Address",
+        placeholder: "Email",
       },
       value: "",
       validation: {
@@ -31,7 +32,7 @@ const Auth = (props) => {
       elementType: "input",
       elementConfig: {
         type: "password",
-        placeholder: "password",
+        placeholder: "Password",
       },
       value: "",
       validation: {
@@ -123,15 +124,40 @@ const Auth = (props) => {
     authRedirect = <Redirect to={authRedirectPath} />;
   }
 
+  const changeToLogin = (
+    <p style={{color:"#707070"}}>Already have an account? Login <a href="/login">here</a></p>
+  );
+
+  const changeToSignup = (
+    <p style={{color:"#707070"}}>Don't have an account? Signup <a href="/signup">here</a></p>
+  );
+
   return (
-    <div className={classes.Auth}>
-      {authRedirect}
-      {errorMessage}
-      <form onSubmit={submitHandler}>{form}</form>
-      <Button btnType="Success" clicked={submitHandler}>
-        {props.isSignUp ? "Sign Up" : "Log In"}
-      </Button>
-    </div>
+    <>
+      <div className={classes.AuthPage}>
+        <div className={classes.Graphic}>
+          <div className={classes.Image}>
+           <a href="https://www.freepik.com/vectors/people"><img src={Graphic} alt="Graphic"/></a>
+          </div>
+        </div>
+        <div className={classes.Auth}>
+          <div>
+            <p className={classes.Tagline}>Join a thriving community</p>
+            <p className={classes.Tagline}>of trustworthy sublets all over the world</p>
+          </div>
+          <p className={classes.Description}>Find apartments for cheap to sublet anywhere in the world with Subleteer. 
+            We provide a platform to connect landlords and tenants in a transparent 
+            ecosystem.</p>
+          {authRedirect}
+          {errorMessage}
+          <form onSubmit={submitHandler}>{form}</form>
+          <Button btnType="Success" clicked={submitHandler}>
+            {props.isSignUp ? "Sign Up" : "Log In"}
+          </Button>
+          {props.isSignUp ? changeToLogin : changeToSignup}
+        </div>
+      </div>
+    </>
   );
 };
 

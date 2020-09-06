@@ -1,12 +1,13 @@
 const HttpError = require('../models/http-error');
 const Listing = require('../models/listing');
-
+const User = require('../models/user');
 const getCoordinatesFromAddress = require('../util/location');
+const ObjectId = require('mongodb').ObjectID;
 
 const createListing = async (req, res, next) => {
     const {title, bedrooms, 
         price, gender, address,
-        bathrooms, image, creator, description } = req.body;
+        bathrooms, image, userID, description } = req.body;
 
     let coordinates;
     try{
@@ -28,9 +29,24 @@ const createListing = async (req, res, next) => {
         },
         bathrooms, 
         image, 
-        creator, 
+        userID : ObjectId(userID), 
         description 
     });
+
+    let user;
+
+    try{
+        user = await User.find(ObjectId(userID));
+    }catch(error){
+        console.log(error);
+        const err = new HttpError("Couldn't create listing, please try again later", 500);
+        return next(err);
+    }
+
+    if(!user){
+        const err = new HttpError("User doesn't exist, couldn't create listing", 404);
+        return next(err);
+    }
 
     try{
         await newListing.save();
@@ -70,15 +86,88 @@ const getListingsByAddress = async (req, res, next) => {
 
 const getListingsByFilters = async (req, res, next) => {
 
-    res.json({message: "Successful connection for getting listings by filters"});
+    const {address, price, bedrooms, gender} = req.body;
+
+    let coordinates;
+    try{
+        coordinates = await getCoordinatesFromAddress(address);
+    }catch(error){
+        console.log(error);
+        return next(error);
+    }
+
+    const Filters = [
+        {
+          name: "price", 
+          val: price
+        },
+        {
+          name: "bedrooms",
+          val: bedrooms
+        },
+        {
+          name: "gender",
+          val: gender
+        }
+      ];
+
+    const query = {
+        $and : [
+            {
+                location: {
+                    $near: {
+                        $maxDistance: 1000,
+                        $geometry: {
+                            type: "Point",
+                            coordinates: [coordinates.lng, coordinates.lat]
+                        }
+                    }
+                }
+            }
+        ]
+    }   
+
+    const filterOptions = {
+      "price": {
+                    price: {
+                        $lte: price
+                    }
+                },
+      "bedrooms": {
+                    bedrooms: {
+                        $eq: bedrooms
+                    }
+                },
+      "gender": {
+                    gender: {
+                        $eq: gender
+                    }
+                }
+    }
+
+    Filters.forEach(filter => {
+          if(filter.val !== null ){
+              const name = filter.name;
+              query.$and.push(filterOptions[filter.name]);
+          }
+      });
+
+    let listings = [];
+    try{
+        listings = await Listing.find(query);
+    }catch(error){
+        const err = new HttpError("Couldn't find any listings", 500);
+        return next(err);
+    }
+
+    res.json({listings});
 };
 
 const updateListing = async (req, res, next) => {
     
     const {title, bedrooms, price, 
         gender, bathrooms, image, 
-        description} = req.body;
-    const listingID = req.params.lid;
+        description, listingID} = req.body;
 
     let listing;
 
@@ -112,7 +201,6 @@ const updateListing = async (req, res, next) => {
         listing.description = description;
     }
     
-
     try{
         await listing.save();
     }catch(error){
@@ -125,7 +213,25 @@ const updateListing = async (req, res, next) => {
 
 const deleteListing = async (req, res, next) => {
 
-    res.json({message: "Successful connection for deleting listings"});
+    const {listingID} = req.body;
+
+    let listing; 
+    try{
+        listing = await Listing.findById(listingID);
+    }
+    catch(error){
+        const err = new HttpError("Something went wrong, couldn't delete listing", 500);
+        return next(err);
+    }
+
+    try{
+        await listing.remove();
+    }catch(error){
+        const err = new HttpError("Something went wrong, couldn't delete listing", 500);
+        return next(err);
+    }
+
+    res.json({message: "Deleted listing"});
 };
 
 exports.createListing = createListing;

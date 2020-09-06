@@ -4,8 +4,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const signup = async (req, res, next) => {
-  //  res.json({message: "Successful connection to signup user"});
-
+  
   let existingUser;
   existingUser = await User.findOne({ email: req.body.email });
      

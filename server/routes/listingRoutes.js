@@ -19,8 +19,8 @@ router.post(
 
 router.post('/', listingControllers.createListing);
 
-router.patch('/:lid', listingControllers.updateListing);
+router.patch('/', listingControllers.updateListing);
 
-router.delete('/:lid', listingControllers.deleteListing);
+router.delete('/', listingControllers.deleteListing);
 
 module.exports = router;

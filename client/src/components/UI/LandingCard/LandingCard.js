@@ -8,21 +8,23 @@ import CardContent from '@material-ui/core/CardContent';
 const useStyles = makeStyles(theme => ({    
       cardContainer: {
         display: "flex",
-        margin: "0rem 7rem"
+        margin: "0rem 7rem",
       },
       card: {
           margin:"1rem",
-          padding: "1rem"
+          padding: "1rem",
+          width:"300px"
       },
       cardOuter:{
           borderRadius: "10px",
-
           margin: "2rem"
+      },
+      centerAlign:{
+          textAlign:"center"
       }
-
 }));
 
-const LandingCard = () => {
+const LandingCard = (props) => {
     const classes = useStyles();  
     const [raised, setRaised] = useState(true);
     const toggleRaised = () => setRaised(!raised);
@@ -30,14 +32,13 @@ const LandingCard = () => {
     return(
         <Card onMouseOver={toggleRaised} onMouseOut={toggleRaised} raised={raised} className={classes.cardOuter}>
             <CardContent className={classes.card}>
-            <Typography variant="h4">
-            Location
-            </Typography>
-            <Typography>
-            If you want to find sublets in different cities, you need to join different sublet groups. This is inconvenient and can
-be a barrier for new customers because they may not be able to find the correct groups.
-            </Typography>
-
+                <Typography variant="h4" className={classes.centerAlign}>
+                {props.title}
+                </Typography>
+                <br/>
+                <Typography className={classes.centerAlign}>
+                {props.description}
+                </Typography>
             </CardContent>
         </Card>
     );
