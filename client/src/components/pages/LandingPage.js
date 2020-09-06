@@ -113,7 +113,7 @@ const LandingPage = () => {
           Why Subleteer?
         </Typography>
         <Grid className={classes.gridContainer} container spacing={1} justify="center" >
-          <Grid item xs={0} md={1} />
+          <Grid item />
           <Grid item xs={8} md={3} >
             <LandingCard 
               title="Location"
@@ -133,7 +133,7 @@ const LandingPage = () => {
             description="View building reviews before signing your sublet. No unpleasant surprises when moving in."
             />
           </Grid>
-          <Grid item xs={0} md={1} />
+          <Grid item />
         </Grid>
         <Footer/>
       </div>

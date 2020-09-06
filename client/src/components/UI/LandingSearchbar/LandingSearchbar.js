@@ -12,16 +12,11 @@ const LandingSearchbar = () => {
 
   const [address, setAddress] = useState("");
   const history = useHistory();
-  const [coordinates, setCoordinates] = useState({
-    lat: null,
-    lng: null
-  });
 
   const handleSelect = async value => {
     setAddress(value);
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
-    setCoordinates(latLng);
     const info = {name: value, ...latLng}
 
     history.push("/results", {info});
@@ -52,7 +47,7 @@ const LandingSearchbar = () => {
                   backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
                 };
                 return (
-                  <div {...getSuggestionItemProps(suggestion, { style, key: suggestion.placeId})}>
+                  <div key={suggestion.placeId} {...getSuggestionItemProps(suggestion, { style })}>
                     {suggestion.description}
                   </div>
                 );
