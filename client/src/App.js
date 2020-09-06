@@ -3,7 +3,7 @@ import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
-import Results from "./components/pages/Results"
+import Results from "./components/pages/Results/Results";
 
 import * as actions from "./store/actions/index";
 
