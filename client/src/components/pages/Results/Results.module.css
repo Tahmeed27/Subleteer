@@ -1,0 +1,9 @@
+.ResultsPage{
+    display: flex;
+}
+
+.Content{
+    background-color: white;
+    width: 70%;
+
+}
