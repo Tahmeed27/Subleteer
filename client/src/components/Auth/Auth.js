@@ -124,6 +124,14 @@ const Auth = (props) => {
     authRedirect = <Redirect to={authRedirectPath} />;
   }
 
+  const changeToLogin = (
+    <p style={{color:"#707070"}}>Already have an account? Login <a href="/login">here</a></p>
+  );
+
+  const changeToSignup = (
+    <p style={{color:"#707070"}}>Don't have an account? Signup <a href="/signup">here</a></p>
+  );
+
   return (
     <>
       <div className={classes.AuthPage}>
@@ -146,6 +154,7 @@ const Auth = (props) => {
           <Button btnType="Success" clicked={submitHandler}>
             {props.isSignUp ? "Sign Up" : "Log In"}
           </Button>
+          {props.isSignUp ? changeToLogin : changeToSignup}
         </div>
       </div>
     </>
