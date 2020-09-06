@@ -44,6 +44,10 @@ const App = (props) => {
           path="/signup"
           render={(props) => <Auth {...props} isSignUp={true} />}
         />
+        <Route
+        path="/results"
+        render={(props) => <Results {...props} />}
+      />
         <Route path="/" exact component={LandingPage} />
         <Redirect to="/" />
       </Switch>
