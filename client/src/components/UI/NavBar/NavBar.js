@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
+import * as action from "../../../store/actions/index";
 import classes from "./NavBar.module.css";
 
 const NavLinkStyle = {
@@ -25,13 +26,17 @@ const NavBar = (props) => {
   );
 
   if (props.isAuthenticated) {
-    nav = <div style={NavLinkStyle}>Hello, {props.username}</div>;
+    nav = (
+      <div style={NavLinkStyle} onClick={props.logout}>
+        Hello, {props.username}
+      </div>
+    );
   }
 
   return (
     <div className={classes.navbar}>
       <div>Logo</div>
-      <div className={classes.links}>{nav}</div>
+      <div className={`${classes.links} ${classes.Welcome}`}>{nav}</div>
     </div>
   );
 };
@@ -43,5 +48,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(NavBar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(action.logout()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 

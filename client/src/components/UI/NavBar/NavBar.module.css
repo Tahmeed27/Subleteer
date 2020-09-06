@@ -1,16 +1,21 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: 1rem;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 1rem;
 }
 
-.links{
-    display: flex;
-    font-size: 1.5rem;
-    margin: 1rem;
+.links {
+  display: flex;
+  font-size: 1.5rem;
+  margin: 1rem;
 }
 
-.NavLink{
-    border: 1px solid white
+.NavLink {
+  border: 1px solid white;
 }
+
+.Welcome {
+  cursor: pointer;
+}
+

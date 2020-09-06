@@ -1,8 +1,6 @@
 import axios from "axios";
 
 import * as actionTypes from "./actionTypes";
-//@TODO
-//add username in state
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START,
@@ -66,7 +64,7 @@ export const auth = (email, password, isSignup, username = null) => {
       .then((response) => {
         console.log(response);
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-        
+
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", response.data._id);
@@ -75,7 +73,7 @@ export const auth = (email, password, isSignup, username = null) => {
           authSuccess(
             response.data.token,
             response.data._id,
-            response.data.username,
+            response.data.username
           )
         );
         dispatch(checkAuthTimeout(3600));
