@@ -5,8 +5,7 @@ import NavBar from '../../UI/NavBar/NavBar';
 import FilterSection from '../../UI/ResultsFilters/ResultsFilters';
 
 const Results = (props) => {
-    const info = props.location.state ? props.location.state.info : ""
-    console.log(info)
+    const info = props.location.state ? props.location.state.info : "";
 
     return (
         <>
