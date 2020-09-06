@@ -4,23 +4,29 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng
 } from "react-places-autocomplete";
+import { useHistory } from 'react-router-dom';
 import classes from './LandingSearchbar.module.css';
+
 
 const LandingSearchbar = () => {
 
   const [address, setAddress] = useState("");
+  const history = useHistory();
   const [coordinates, setCoordinates] = useState({
     lat: null,
     lng: null
   });
 
   const handleSelect = async value => {
+    setAddress(value);
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
-    setAddress(value);
     setCoordinates(latLng);
-    console.log({name: value, ...latLng})
+    const info = {name: value, ...latLng}
+
+    history.push("/results", {info});
   };
+
 
   return (
     <div>
@@ -34,7 +40,7 @@ const LandingSearchbar = () => {
             <div className={classes.search}>
                 <input {...getInputProps({ placeholder: "Where do you want to live?", className: classes.inputRoot} )} />
                 <div className={classes.searchIcon}>
-                <SearchIcon />
+                <SearchIcon className={classes.searchIcon}/>
                 </div>
             </div>
             <div>

@@ -6,6 +6,7 @@ import LandingCard from "../UI/LandingCard/LandingCard";
 import Footer from '../UI/Footer/Footer';
 import LandingSearchbar from "../UI/LandingSearchbar/LandingSearchbar";
 import Navbar from '../UI/NavBar/NavBar';
+import Grid from '@material-ui/core/Grid';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +90,9 @@ const useStyles = makeStyles((theme) => ({
 
     margin: "2rem",
   },
+  gridContainer: {
+    marginBottom: "2rem"
+  }
 }));
 
 const LandingPage = () => {
@@ -102,40 +106,35 @@ const LandingPage = () => {
           <div className={classes.titleText}>Subleteer</div>
           <div className={classes.bodyText}>Find your ideal sublet</div>
           <LandingSearchbar />
-          {/* <div className={classes.search}>
-            <InputBase
-              placeholder="Where do you want to live?"
-              classes={{
-                root: classes.inputRoot,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-          </div> */}
         </div>
       </div>
       <div className={classes.lowerDiv}>
         <Typography variant="h4" className={classes.lowerText}>
           Why Subleteer?
         </Typography>
-        <div className={classes.cardContainer}>
-          <LandingCard 
-            title="Location"
-            description="One platform for all sublets. 
-            Find sublets in any city with a simple search. 
-            No need to find different sublet groups anymore."
-          />
-          <LandingCard 
-            title="Filters"
-            description="Filter sublets by different factors to get the best matches quickly."
-          />
-          <LandingCard 
-            title = "Ratings"
-            description="View building reviews before signing your sublet. No more unpleasant surprises when you move in."
-          />
-        </div>
+        <Grid className={classes.gridContainer} container spacing={1} justify="center" >
+          <Grid item xs={0} md={1} />
+          <Grid item xs={8} md={3} >
+            <LandingCard 
+              title="Location"
+              description="Find sublets in any city with a simple search.
+              No need to find different sublet groups anymore."
+            />
+          </Grid>
+          <Grid item xs={8} md={3} >
+            <LandingCard 
+              title="Filters"
+              description="Filter sublets by different factors to get the best matches quickly. Find exactly what you're looking for."
+            />
+          </Grid>
+          <Grid item xs={8} md={3}>
+            <LandingCard 
+               title = "Ratings"
+            description="View building reviews before signing your sublet. No unpleasant surprises when moving in."
+            />
+          </Grid>
+          <Grid item xs={0} md={1} />
+        </Grid>
         <Footer/>
       </div>
     </div>
