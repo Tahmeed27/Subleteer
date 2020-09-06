@@ -2,11 +2,10 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
-import LandingCard from "../LandingCard";
+import LandingCard from "../UI/LandingCard/LandingCard";
 import Footer from '../UI/Footer/Footer';
+import LandingSearchbar from "../UI/LandingSearchbar/LandingSearchbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "100%",
     height: "100%",
-    paddingBottom: "2rem",
+    paddingBottom: "15rem",
   },
   search: {
     margin: "2rem",
@@ -138,7 +137,8 @@ const LandingPage = () => {
         <div className={classes.centerDiv}>
           <div className={classes.titleText}>Subleteer</div>
           <div className={classes.bodyText}>Find your ideal sublet</div>
-          <div className={classes.search}>
+          <LandingSearchbar />
+          {/* <div className={classes.search}>
             <InputBase
               placeholder="Where do you want to live?"
               classes={{
@@ -149,7 +149,7 @@ const LandingPage = () => {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={classes.lowerDiv}>
