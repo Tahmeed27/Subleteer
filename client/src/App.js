@@ -3,6 +3,7 @@ import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
+import Results from "./components/pages/Results"
 
 import * as actions from "./store/actions/index";
 
@@ -22,6 +23,10 @@ const App = (props) => {
       <Route
         path="/signup"
         render={(props) => <Auth {...props} isSignUp={true} />}
+      />
+      <Route
+        path="/results"
+        render={(props) => <Results {...props} />}
       />
       <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />

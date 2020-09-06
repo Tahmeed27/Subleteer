@@ -26,7 +26,7 @@ const NavBar = () => {
               style={NavLinkStyle}
             >
               <div>
-                Login
+                Log In
               </div>
             </NavLink>
           </div>
