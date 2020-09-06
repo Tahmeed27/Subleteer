@@ -6,9 +6,8 @@ const NavLinkStyle = {
     textDecoration: "none", 
     color: "white", 
     textAlign: "center", 
-    border: "1px solid white", 
     padding:"5px", 
-    margin: "2px 10px"
+    margin: "2px 15px"
 }
 const NavBar = () => {
     return (
@@ -17,12 +16,8 @@ const NavBar = () => {
           <div className={classes.links}>
             <NavLink
               to="/signup"
-              style={NavLinkStyle}
-            >
-              <div
-                className={classes.linkText}
-                activeClassName={classes.linkText}
-              >
+              style={NavLinkStyle}>
+              <div>
                 Sign Up
               </div>
             </NavLink>
@@ -30,11 +25,8 @@ const NavBar = () => {
               to="/login"
               style={NavLinkStyle}
             >
-              <div
-                className={classes.linkText}
-                activeClassName={classes.linkText}
-              >
-                LogIn
+              <div>
+                Log In
               </div>
             </NavLink>
           </div>
