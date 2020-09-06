@@ -1,31 +1,18 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
-import LandingCard from "../LandingCard";
+import LandingCard from "../UI/LandingCard/LandingCard";
 import Footer from '../UI/Footer/Footer';
+import LandingSearchbar from "../UI/LandingSearchbar/LandingSearchbar";
+import Navbar from '../UI/NavBar/NavBar';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#f9f9f9",
   },
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "100%",
-    paddingTop: "1rem",
-  },
-  links: {
-    display: "flex",
-    fontSize: "1.5rem",
-    margin: "1rem",
-  },
-  linkText: {
-    paddingRight: "1.6rem",
-  },
+
   hero: {
     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1524813686514-a57563d77965?ixlib=rb-1.2.1&auto=format&fit=crop&w=2689&q=80')`,
     height: "800px",
@@ -52,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "100%",
     height: "100%",
-    paddingBottom: "2rem",
+    paddingBottom: "15rem",
   },
   search: {
     margin: "2rem",
@@ -81,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginTop: "20px"
   },
   lowerText: {
     padding: "1.5rem",
@@ -90,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
   cardContainer: {
     display: "flex",
     margin: "0rem 7rem",
+    marginBottom: "50px",
   },
   card: {
     margin: "1rem",
@@ -108,37 +97,12 @@ const LandingPage = () => {
   return (
     <div className={classes.root}>
       <div className={classes.hero}>
-        <div className={classes.navbar}>
-          <div>Logo</div>
-          <div className={classes.links}>
-            <NavLink
-              to="/signup"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              <div
-                className={classes.linkText}
-                activeClassName={classes.linkText}
-              >
-                Sign Up
-              </div>
-            </NavLink>
-            <NavLink
-              to="/login"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              <div
-                className={classes.linkText}
-                activeClassName={classes.linkText}
-              >
-                LogIn
-              </div>
-            </NavLink>
-          </div>
-        </div>
+        <Navbar/>
         <div className={classes.centerDiv}>
           <div className={classes.titleText}>Subleteer</div>
           <div className={classes.bodyText}>Find your ideal sublet</div>
-          <div className={classes.search}>
+          <LandingSearchbar />
+          {/* <div className={classes.search}>
             <InputBase
               placeholder="Where do you want to live?"
               classes={{
@@ -149,7 +113,7 @@ const LandingPage = () => {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={classes.lowerDiv}>
@@ -157,9 +121,20 @@ const LandingPage = () => {
           Why Subleteer?
         </Typography>
         <div className={classes.cardContainer}>
-          <LandingCard />
-          <LandingCard />
-          <LandingCard />
+          <LandingCard 
+            title="Location"
+            description="One platform for all sublets. 
+            Find sublets in any city with a simple search. 
+            No need to find different sublet groups anymore."
+          />
+          <LandingCard 
+            title="Filters"
+            description="Filter sublets by different factors to get the best matches quickly."
+          />
+          <LandingCard 
+            title = "Ratings"
+            description="View building reviews before signing your sublet. No more unpleasant surprises when you move in."
+          />
         </div>
         <Footer/>
       </div>
