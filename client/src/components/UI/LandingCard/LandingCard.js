@@ -6,14 +6,10 @@ import CardContent from '@material-ui/core/CardContent';
 
 
 const useStyles = makeStyles(theme => ({    
-      cardContainer: {
-        display: "flex",
-        margin: "0rem 7rem",
-      },
       card: {
           margin:"1rem",
           padding: "1rem",
-          width:"300px"
+       //   width:"300px"
       },
       cardOuter:{
           borderRadius: "10px",
