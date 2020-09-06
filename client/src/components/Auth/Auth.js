@@ -129,7 +129,7 @@ const Auth = (props) => {
       <div className={classes.AuthPage}>
         <div className={classes.Graphic}>
           <div className={classes.Image}>
-           <img src={Graphic} alt="Graphic"/> 
+           <a href="https://www.freepik.com/vectors/people"><img src={Graphic} alt="Graphic"/></a>
           </div>
         </div>
         <div className={classes.Auth}>
