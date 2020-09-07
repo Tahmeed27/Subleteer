@@ -71,8 +71,41 @@ const getListingsByAddress = async (req, res, next) => {
             }
         }
     });
+
+    let editedListings = [];
+
+    try{
+        /*
+        editedListings = await Promise.all(listings.map(async (listing) => {
+            const userID = listing.userID;
+            const MongoUser = await User.find(ObjectId(userID));
+            listing = {...listing, location: listing.location, user: MongoUser[0]};
+        }));*/
+        
+        for(var listing of listings){
+            const userID = listing.userID;
+            const mongoUser = await User.find(ObjectId(userID));
+            listing = {
+                user: mongoUser[0],
+                title: listing.title,
+                bedrooms: listing.bedrooms,
+                price: listing.price,
+                gender: listing.gender,
+                address: listing.address,
+                location: listing.location, 
+                bathrooms: listing.bathrooms,
+                image: listing.image,
+                description: listing.description
+            };
+            editedListings.push(listing);
+        }
+    }catch(error){
+        console.log(error);
+        const err = new HttpError("Something went wrong when trying to find user data for each listing", 500);
+        return next(err);
+    }
     
-    res.json({message: "Success! Here are the listings.", listings: listings});
+    res.json({message: "Success! Here are the listings.", listings: editedListings});
 };
 
 const getListingsByFilters = async (req, res, next) => {
@@ -145,7 +178,40 @@ const getListingsByFilters = async (req, res, next) => {
         return next(err);
     }
 
-    res.json({listings});
+    let editedListings = [];
+
+    try{
+        /*
+        editedListings = await Promise.all(listings.map(async (listing) => {
+            const userID = listing.userID;
+            const MongoUser = await User.find(ObjectId(userID));
+            listing = {...listing, location: listing.location, user: MongoUser[0]};
+        }));*/
+        
+        for(var listing of listings){
+            const userID = listing.userID;
+            const mongoUser = await User.find(ObjectId(userID));
+            listing = {
+                user: mongoUser[0],
+                title: listing.title,
+                bedrooms: listing.bedrooms,
+                price: listing.price,
+                gender: listing.gender,
+                address: listing.address,
+                location: listing.location, 
+                bathrooms: listing.bathrooms,
+                image: listing.image,
+                description: listing.description
+            };
+            editedListings.push(listing);
+        }
+    }catch(error){
+        console.log(error);
+        const err = new HttpError("Something went wrong when trying to find user data for each listing", 500);
+        return next(err);
+    }
+
+    res.json({message: "Sucsess! Here are the listings.", listings: editedListings});
 };
 
 const updateListing = async (req, res, next) => {
