@@ -1,5 +1,5 @@
 import React from "react"
-
+import {connect} from 'react-redux';
 import classes from './Results.module.css';
 import NavBar from '../../UI/NavBar/NavBar';
 import FilterSection from '../../UI/ResultsFilters/ResultsFilters';
@@ -11,13 +11,21 @@ const Results = (props) => {
         <>
             <NavBar/>
             <div className={classes.ResultsPage}>
-                <FilterSection/>
+                <FilterSection address="200 University Avenue West, Waterloo"/>
                 <div className={classes.Content}>
-                    <p> Content</p>
+                    {props.listings.forEach(listing => {
+                        return (<p key={listing._id}>{listing.title}</p>);
+                    })}
                 </div>
             </div>
         </>
     )
 }
 
-export default Results
+const mapDispatchToProps = state => { 
+    return{
+        listings: state.listings.listings
+    };
+}
+
+export default connect(mapDispatchToProps, null)(Results);

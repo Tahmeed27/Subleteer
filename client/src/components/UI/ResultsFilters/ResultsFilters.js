@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { connect } from "react-redux";
 import classes from './ResultsFilters.module.css';
 import Slider from '@material-ui/core/Slider';
 import { ThemeProvider } from '@material-ui/styles';
@@ -8,7 +9,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
-const ResultsFilters = () => {
+import * as actions from "../../../store/actions/index";
+
+const ResultsFilters = (props) => {
 
     const [gender, setGender] = useState('co-ed');
     const [price, setPrice] = useState(500);
@@ -67,8 +70,8 @@ const ResultsFilters = () => {
         },
     ];
 
-    const handleSearchFilters = () => {
-        
+    const handleSearchFilters = async () => {
+        await props.getListingsByFilters(price, bedrooms, gender, props.address);
     }
 
     return (
@@ -109,9 +112,9 @@ const ResultsFilters = () => {
             <div style={{marginLeft: "20px"}}>
                 <FormControl component="fieldset">
                     <RadioGroup aria-label="Bedrooms" name="bedroom" value={gender} onChange={handleGenderChange}>
-                        <FormControlLabel value="Male only" control={<Radio />} label="Male only" />
-                        <FormControlLabel value="Female only" control={<Radio />} label="Female only" />
-                        <FormControlLabel value="co-ed" control={<Radio/>} label="Co-ed" />
+                        <FormControlLabel value="male" control={<Radio />} label="Male only" />
+                        <FormControlLabel value="female" control={<Radio />} label="Female only" />
+                        <FormControlLabel value="any" control={<Radio/>} label="Co-ed" />
                     </RadioGroup>
                 </FormControl>
             </div>
@@ -125,4 +128,17 @@ const ResultsFilters = () => {
     );
 };
 
-export default ResultsFilters;
+    const mapStateToProps = state => {
+        return{
+            listings: state.listings.listings
+        };
+    }
+
+    const mapDispatchToProps = (dispatch) => {
+        return {
+            getListingsByFilters: (price, bedrooms, gender, address) =>
+            dispatch(actions.getListingsByFilter(price, bedrooms, gender, address))
+        };
+    };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(ResultsFilters);
