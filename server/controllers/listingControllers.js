@@ -9,23 +9,19 @@ const createListing = async (req, res, next) => {
         price, gender, address,
         bathrooms, image, userID, description } = req.body;
 
-    let coordinates;
-    try{
-        coordinates = await getCoordinatesFromAddress(address);
-    }catch(error){
-        console.log(error);
-        return next(error);
-    }
+    const lat = address.lat;
+    const lng = address.lng;
+    const addressName = address.name;
 
     const newListing = new Listing({
         title, 
         bedrooms, 
         price, 
         gender, 
-        address,  
+        address: addressName,  
         location: {
             type: "Point",
-            coordinates: [coordinates.lng, coordinates.lat]
+            coordinates: [lng, lat]
         },
         bathrooms, 
         image, 
@@ -61,13 +57,8 @@ const createListing = async (req, res, next) => {
 const getListingsByAddress = async (req, res, next) => {
     const {address} = req.body;
 
-    let coordinates;
-    try{
-        coordinates = await getCoordinatesFromAddress(address);
-    }catch(error){
-        console.log(error);
-        return next(error);
-    }
+    const lat = address.lat;
+    const lng = address.lng;
 
     const listings = await Listing.find({
         location: {
@@ -75,26 +66,21 @@ const getListingsByAddress = async (req, res, next) => {
                 $maxDistance: 1000,
                 $geometry: {
                     type: "Point",
-                    coordinates: [coordinates.lng, coordinates.lat]
+                    coordinates: [lng, lat]
                 }
             }
         }
     });
     
-    res.json({message: "successful connection for getting listings by address", listings: listings});
+    res.json({message: "Success! Here are the listings.", listings: listings});
 };
 
 const getListingsByFilters = async (req, res, next) => {
 
     const {address, price, bedrooms, gender} = req.body;
 
-    let coordinates;
-    try{
-        coordinates = await getCoordinatesFromAddress(address);
-    }catch(error){
-        console.log(error);
-        return next(error);
-    }
+    const lat = address.lat;
+    const lng = address.lng;
 
     const Filters = [
         {
@@ -119,7 +105,7 @@ const getListingsByFilters = async (req, res, next) => {
                         $maxDistance: 1000,
                         $geometry: {
                             type: "Point",
-                            coordinates: [coordinates.lng, coordinates.lat]
+                            coordinates: [lng, lat]
                         }
                     }
                 }
@@ -147,7 +133,6 @@ const getListingsByFilters = async (req, res, next) => {
 
     Filters.forEach(filter => {
           if(filter.val !== null ){
-              const name = filter.name;
               query.$and.push(filterOptions[filter.name]);
           }
       });
