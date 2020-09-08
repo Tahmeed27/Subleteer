@@ -11,21 +11,19 @@ const Results = (props) => {
         <>
             <NavBar/>
             <div className={classes.ResultsPage}>
-                <FilterSection address="200 University Avenue West, Waterloo"/>
+                <FilterSection address={info}/>
                 <div className={classes.Content}>
-                    {props.listings.forEach(listing => {
-                        return (<p key={listing._id}>{listing.title}</p>);
-                    })}
+                    
                 </div>
             </div>
         </>
     )
 }
 
-const mapDispatchToProps = state => { 
+const mapStateToProps = state => { 
     return{
         listings: state.listings.listings
     };
 }
 
-export default connect(mapDispatchToProps, null)(Results);
+export default connect(mapStateToProps, null)(Results);
