@@ -4,6 +4,7 @@ import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import * as actions from "./store/actions/index";
 
@@ -24,10 +25,7 @@ const App = (props) => {
         path="/signup"
         render={(props) => <Auth {...props} isSignUp={true} />}
       />
-      <Route
-        path="/results"
-        render={(props) => <Results {...props} />}
-      />
+      <Route path="/results" render={(props) => <Results {...props} />} />
       <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />
     </Switch>
@@ -44,17 +42,29 @@ const App = (props) => {
           path="/signup"
           render={(props) => <Auth {...props} isSignUp={true} />}
         />
-        <Route
-        path="/results"
-        render={(props) => <Results {...props} />}
-      />
+        <Route path="/results" render={(props) => <Results {...props} />} />
         <Route path="/" exact component={LandingPage} />
         <Redirect to="/" />
       </Switch>
     );
   }
 
-  return <div className="App">{routes}</div>;
+  let theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#fff",
+      },
+      secondary: {
+        main: "#e16d14",
+      },
+    },
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="App">{routes}</div>
+    </ThemeProvider>
+  );
 };
 
 const mapStateToProps = (state) => {

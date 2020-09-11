@@ -1,9 +1,15 @@
-.ResultsPage{
-    display: flex;
+/* .ResultsPage { */
+/*   display: flex; */
+/*   width: 80%; */
+/* } */
+
+.Content {
+  background-color: white;
+  width: 80%;
+  margin: 0 auto;
 }
 
-.Content{
-    background-color: white;
-    width: 70%;
-
+.Container {
+  text-align: center;
 }
+

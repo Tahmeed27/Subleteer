@@ -1,0 +1,27 @@
+.ListingCard {
+  height: 400px;
+  background-color: #e1e8ed;
+  margin: 10px;
+  width: 450px;
+  border-radius: 20px;
+}
+
+.ImgContainer {
+  width: 100%;
+  height: 70%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: red;
+}
+
+.ImgContainer img {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Icons {
+  display: flex;
+}
