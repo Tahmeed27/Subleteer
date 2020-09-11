@@ -42,29 +42,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     paddingBottom: "15rem",
   },
-  search: {
-    margin: "2rem",
-    backgroundColor: "#fff",
-    width: "40rem",
-    borderRadius: "40px",
-    padding: "0.8rem",
-    display: "flex",
-  },
-  searchIcon: {
-    color: "darkGrey",
-    marginRight: "0.8rem",
-    marginLeft: "1rem",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "black",
-    width: "inherit",
-    marginLeft: "1rem",
-    fontSize: "1.2rem",
-  },
+
   lowerDiv: {
     display: "flex",
     flexDirection: "column",

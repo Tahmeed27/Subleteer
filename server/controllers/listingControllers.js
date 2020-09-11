@@ -4,6 +4,24 @@ const User = require('../models/user');
 const getCoordinatesFromAddress = require('../util/location');
 const ObjectId = require('mongodb').ObjectID;
 
+
+const getListingsByUserID = async (req,res,next) => {
+    const userID = req.params.uid;
+
+    let listings;
+    try{  
+        listings = await Listing.find({
+            userID: ObjectId(userID)
+        });   
+    }catch(error){
+        console.log(error);
+        const err = new HttpError("Couldn't get listings by user, please try again later", 500);
+        return next(err);
+    }
+    
+    res.status(201).json({listings, message: "Success! Here are the listings."});
+};
+
 const createListing = async (req, res, next) => {
     const {title, bedrooms, 
         price, gender, address,
@@ -285,6 +303,7 @@ const deleteListing = async (req, res, next) => {
     res.json({message: "Deleted listing"});
 };
 
+exports.getListingsByUserID = getListingsByUserID;
 exports.createListing = createListing;
 exports.getListingsByAddress = getListingsByAddress;
 exports.getListingsByFilters = getListingsByFilters;
