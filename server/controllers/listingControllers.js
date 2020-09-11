@@ -9,23 +9,19 @@ const createListing = async (req, res, next) => {
         price, gender, address,
         bathrooms, image, userID, description } = req.body;
 
-    let coordinates;
-    try{
-        coordinates = await getCoordinatesFromAddress(address);
-    }catch(error){
-        console.log(error);
-        return next(error);
-    }
+    const lat = address.lat;
+    const lng = address.lng;
+    const addressName = address.name;
 
     const newListing = new Listing({
         title, 
         bedrooms, 
         price, 
         gender, 
-        address,  
+        address: addressName,  
         location: {
             type: "Point",
-            coordinates: [coordinates.lng, coordinates.lat]
+            coordinates: [lng, lat]
         },
         bathrooms, 
         image, 
@@ -61,13 +57,8 @@ const createListing = async (req, res, next) => {
 const getListingsByAddress = async (req, res, next) => {
     const {address} = req.body;
 
-    let coordinates;
-    try{
-        coordinates = await getCoordinatesFromAddress(address);
-    }catch(error){
-        console.log(error);
-        return next(error);
-    }
+    const lat = address.lat;
+    const lng = address.lng;
 
     const listings = await Listing.find({
         location: {
@@ -75,26 +66,54 @@ const getListingsByAddress = async (req, res, next) => {
                 $maxDistance: 1000,
                 $geometry: {
                     type: "Point",
-                    coordinates: [coordinates.lng, coordinates.lat]
+                    coordinates: [lng, lat]
                 }
             }
         }
     });
+
+    let editedListings = [];
+
+    try{
+        /*
+        editedListings = await Promise.all(listings.map(async (listing) => {
+            const userID = listing.userID;
+            const MongoUser = await User.find(ObjectId(userID));
+            listing = {...listing, location: listing.location, user: MongoUser[0]};
+        }));*/
+        
+        for(var listing of listings){
+            const userID = listing.userID;
+            const mongoUser = await User.find(ObjectId(userID));
+            listing = {
+                user: mongoUser[0],
+                title: listing.title,
+                bedrooms: listing.bedrooms,
+                price: listing.price,
+                gender: listing.gender,
+                address: listing.address,
+                location: listing.location, 
+                bathrooms: listing.bathrooms,
+                image: listing.image,
+                description: listing.description
+            };
+            editedListings.push(listing);
+        }
+    }catch(error){
+        console.log(error);
+        const err = new HttpError("Something went wrong when trying to find user data for each listing", 500);
+        return next(err);
+    }
     
-    res.json({message: "successful connection for getting listings by address", listings: listings});
+    res.json({message: "Success! Here are the listings.", listings: editedListings});
 };
 
 const getListingsByFilters = async (req, res, next) => {
 
     const {address, price, bedrooms, gender} = req.body;
 
-    let coordinates;
-    try{
-        coordinates = await getCoordinatesFromAddress(address);
-    }catch(error){
-        console.log(error);
-        return next(error);
-    }
+    const lat = address.lat;
+    const lng = address.lng;
 
     const Filters = [
         {
@@ -119,7 +138,7 @@ const getListingsByFilters = async (req, res, next) => {
                         $maxDistance: 1000,
                         $geometry: {
                             type: "Point",
-                            coordinates: [coordinates.lng, coordinates.lat]
+                            coordinates: [lng, lat]
                         }
                     }
                 }
@@ -147,7 +166,6 @@ const getListingsByFilters = async (req, res, next) => {
 
     Filters.forEach(filter => {
           if(filter.val !== null ){
-              const name = filter.name;
               query.$and.push(filterOptions[filter.name]);
           }
       });
@@ -160,7 +178,40 @@ const getListingsByFilters = async (req, res, next) => {
         return next(err);
     }
 
-    res.json({listings});
+    let editedListings = [];
+
+    try{
+        /*
+        editedListings = await Promise.all(listings.map(async (listing) => {
+            const userID = listing.userID;
+            const MongoUser = await User.find(ObjectId(userID));
+            listing = {...listing, location: listing.location, user: MongoUser[0]};
+        }));*/
+        
+        for(var listing of listings){
+            const userID = listing.userID;
+            const mongoUser = await User.find(ObjectId(userID));
+            listing = {
+                user: mongoUser[0],
+                title: listing.title,
+                bedrooms: listing.bedrooms,
+                price: listing.price,
+                gender: listing.gender,
+                address: listing.address,
+                location: listing.location, 
+                bathrooms: listing.bathrooms,
+                image: listing.image,
+                description: listing.description
+            };
+            editedListings.push(listing);
+        }
+    }catch(error){
+        console.log(error);
+        const err = new HttpError("Something went wrong when trying to find user data for each listing", 500);
+        return next(err);
+    }
+
+    res.json({message: "Sucsess! Here are the listings.", listings: editedListings});
 };
 
 const updateListing = async (req, res, next) => {

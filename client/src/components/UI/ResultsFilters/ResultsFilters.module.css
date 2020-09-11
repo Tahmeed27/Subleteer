@@ -1,5 +1,20 @@
 .FilterSection{
-    background-color: red;
-    width: 30%;
+    background-color: white;
+    width: 20%;
     height: 100vh;
+    border-right: 1px solid darkgray;
+    box-sizing: border-box;
+}
+
+.FilterSection h4{
+    margin-left: 20px;
+}
+
+.SearchButton{
+    width: 80%;
+    margin: 20px; 
+    height: 30px;
+    font-size: large;
+    background-color: #ffb42c;
+    border: 1px solid black;
 }
