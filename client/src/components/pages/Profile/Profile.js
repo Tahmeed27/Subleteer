@@ -33,7 +33,7 @@ const Profile = (props) => {
                         <div className={classes.Acount}>
                             <h2>Acount</h2>
                             <p><b>Email: </b>{props.email}</p>
-                            <p><b>Number of listings: </b></p>
+                            <p><b>Number of listings: {props.userListings.length}</b></p>
                             <br/>
                         </div>
                         <div className={classes.NewListing}>
@@ -55,7 +55,8 @@ const Profile = (props) => {
 const mapStateToProps = (state) => {
     return {
       username: state.auth.username,
-      email: state.auth.email
+      email: state.auth.email,
+      userListings: state.listings.listingsByUserID
     };
   };
   
