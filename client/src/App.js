@@ -4,7 +4,11 @@ import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
+<<<<<<< HEAD
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+=======
+import AddListings from "./components/pages/AddListings/AddListings"
+>>>>>>> 62144798ef574fa81261ee2ed2d67349857943e0
 
 import * as actions from "./store/actions/index";
 
@@ -25,7 +29,15 @@ const App = (props) => {
         path="/signup"
         render={(props) => <Auth {...props} isSignUp={true} />}
       />
-      <Route path="/results" render={(props) => <Results {...props} />} />
+      <Route
+        path="/results"
+        render={(props) => <Results {...props} />}
+      />
+
+      <Route
+          path="/addlisting"
+          render={(props) => <AddListings {...props} />}
+        />
       <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />
     </Switch>
@@ -42,7 +54,14 @@ const App = (props) => {
           path="/signup"
           render={(props) => <Auth {...props} isSignUp={true} />}
         />
-        <Route path="/results" render={(props) => <Results {...props} />} />
+        <Route
+        path="/results"
+        render={(props) => <Results {...props} />}
+      />
+        <Route
+          path="/addlisting"
+          render={(props) => <AddListings {...props} />}
+        />
         <Route path="/" exact component={LandingPage} />
         <Redirect to="/" />
       </Switch>
