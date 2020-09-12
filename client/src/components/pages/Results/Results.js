@@ -1,35 +1,46 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 
 import classes from "./Results.module.css";
 import NavBar from "../../UI/NavBar/NavBar";
 import FilterSection from "../../UI/ResultsFilters/ResultsFilters";
 import Content from "./Content/Content";
+import * as actions from "../../../store/actions";
 
 const Results = (props) => {
-  const [listings, setListings] = useState(null);
+  const { getListings } = props;
   useEffect(() => {
+    console.log(props.location);
     const info = props.location.state ? props.location.state.info : "";
-    const url = "http://localhost:5000/api/listings/address";
-    axios.post(url, { address: info.name }).then((res) => {
-      console.log(res);
-      setListings(res.data.Listings);
-    });
-  }, [props.location.state]);
+    getListings(info);
+  }, [getListings, props.location]);
+
+  console.log(props.listings);
 
   return (
     <>
       <NavBar />
-      {/* <div className={classes.ResultsPage}> */}
-      {/* <FilterSection /> */}
-      <div className={classes.Content}>
-        <Content />
-        {/* </div> */}
+      <div className={classes.Container}>
+        <FilterSection />
+        <div className={classes.Content}>
+          <Content listings={props.listings} />
+        </div>
       </div>
     </>
   );
 };
 
-export default Results;
+const mapStateToProps = (state) => {
+  return {
+    listings: state.listings.listings,
+  };
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getListings: (address) => dispatch(actions.getListingsByAddress(address)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Results);

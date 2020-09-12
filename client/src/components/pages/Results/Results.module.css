@@ -11,5 +11,5 @@
 
 .Container {
   text-align: center;
+  display: flex;
 }
-

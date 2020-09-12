@@ -23,5 +23,27 @@
 }
 
 .Icons {
+  justify-content: space-between;
   display: flex;
+  margin: 0 15px;
+}
+
+.Title {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.Icon {
+  font-size: 20px;
+}
+
+.Value {
+  padding-left: 10px;
+  font-size: 20px;
+  font-style: italic;
+  display: inline;
 }
