@@ -27,9 +27,11 @@ const NavBar = (props) => {
 
   if (props.isAuthenticated) {
     nav = (
-      <div style={NavLinkStyle} onClick={props.logout}>
+      // <div style={NavLinkStyle} onClick={props.logout}>
+      <NavLink style={NavLinkStyle} to="/profile">
         Hello, {props.username}
-      </div>
+      </NavLink>
+      // </div>
     );
   }
 

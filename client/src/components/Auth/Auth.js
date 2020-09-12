@@ -132,6 +132,8 @@ const Auth = (props) => {
     <p style={{color:"#707070"}}>Don't have an account? Signup <a href="/signup">here</a></p>
   );
 
+  console.log("rendered");
+  
   return (
     <>
       <div className={classes.AuthPage}>
