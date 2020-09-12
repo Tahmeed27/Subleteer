@@ -1,0 +1,92 @@
+.NavBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 25px;
+    height: 100px;
+    box-shadow:  0 4px 2px -2px lightgray;
+}
+
+.NavBar .ProfilePicture{
+    width: 50px;
+    height: 50px;
+    margin-right: 25px;
+    border-radius: 50%;
+}
+
+.NavBarOptions{
+    display: flex;
+}
+
+.Logout:hover{
+    cursor: pointer;
+}
+
+.ProfilePicture img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.Profile{
+    margin: 0% 5%;
+}
+
+.Main{
+    display: flex;
+}
+
+.UserInfo{
+    width: 25%;
+    height: 75vh;
+    margin-top: 50px;
+    border-radius: 25px;
+    box-shadow:   -1px -1px 1px 2px #ccc;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+}
+
+.DPWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px double orange;
+}
+
+.UserInfo .ProfilePicture{
+    width: 200px;
+    height: 200px;
+    margin-right: 25px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.Greetings{
+    font-size: 1.5rem;
+}
+
+.Acount{
+    border-bottom: 2px double orange;
+}
+
+.NewListing p{
+    line-height: 1.5em;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.NewListing button{
+    background-color: transparent;
+    border: 2px solid orange;
+    border-radius: 20px;
+    padding: 10px 10px;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.Content{
+    margin-top: 50px;
+    margin-left: 50px;
+}
