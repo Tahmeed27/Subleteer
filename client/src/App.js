@@ -4,10 +4,11 @@ import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
-import AddListings from "./components/pages/AddListings/AddListings"
-import ProfilePage from './components/pages/Profile/Profile';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import AddListings from "./components/pages/AddListings/AddListings";
 
 import * as actions from "./store/actions/index";
+import ListingPage from "./components/pages/ListingPage/ListingPage";
 
 const App = (props) => {
   const { onTryAutoSignup } = props;
@@ -27,15 +28,8 @@ const App = (props) => {
         path="/signup"
         render={(props) => <Auth {...props} isSignUp={true} />}
       />
-      <Route
-        path="/results"
-        render={(props) => <Results {...props} />}
-      />
-      
-      <Route
-          path="/addlisting"
-          render={(props) => <AddListings {...props} />}
-        />
+      <Route path="/results" render={(props) => <Results {...props} />} />
+      <Route path="/listingpage" exact component={ListingPage} />
       <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />
     </Switch>
@@ -45,10 +39,14 @@ const App = (props) => {
     routes = (
       <Switch>
         <Route
-        path="/results"
-        render={(props) => <Results {...props} />}
-        exact
+          path="/login"
+          render={(props) => <Auth {...props} isSignUp={false} />}
         />
+        <Route
+          path="/signup"
+          render={(props) => <Auth {...props} isSignUp={true} />}
+        />
+        <Route path="/results" render={(props) => <Results {...props} />} />
         <Route
           path="/addlisting"
           render={(props) => <AddListings {...props} />}
@@ -65,7 +63,22 @@ const App = (props) => {
     );
   }
 
-  return <div className="App">{routes}</div>;
+  let theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#fff",
+      },
+      secondary: {
+        main: "#e16d14",
+      },
+    },
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="App">{routes}</div>
+    </ThemeProvider>
+  );
 };
 
 const mapStateToProps = (state) => {
