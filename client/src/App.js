@@ -8,6 +8,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import AddListings from "./components/pages/AddListings/AddListings";
 
 import * as actions from "./store/actions/index";
+import ListingPage from "./components/pages/ListingPage/ListingPage";
 
 const App = (props) => {
   const { onTryAutoSignup } = props;
@@ -27,11 +28,7 @@ const App = (props) => {
         render={(props) => <Auth {...props} isSignUp={true} />}
       />
       <Route path="/results" render={(props) => <Results {...props} />} />
-
-      <Route
-        path="/addlisting"
-        render={(props) => <AddListings {...props} />}
-      />
+      <Route path="/listingpage" exact component={ListingPage} />
       <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />
     </Switch>
