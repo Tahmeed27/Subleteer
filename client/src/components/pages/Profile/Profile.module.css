@@ -86,6 +86,10 @@
     margin-top: 10px;
 }
 
+.NewListing button:hover{
+    background-color: orange;
+}
+
 .Content{
     margin-top: 50px;
     margin-left: 50px;

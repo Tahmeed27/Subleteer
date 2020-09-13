@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import classes from './Profile.module.css';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 
 const Profile = (props) => {
+
+    const history = useHistory();
 
     const {userListings} = props;
     const {userID}= props;
@@ -48,7 +51,7 @@ const Profile = (props) => {
                         <div className={classes.NewListing}>
                             <h2>Create New Listing</h2>
                             <p>Looking to sublet your aparment? Add a listing today and get access to a community of tenants looking for a place.</p>
-                            <button>Create New Listing</button>
+                            <button onClick={() => {history.push('/addlisting')}}>Create New Listing</button>
                         </div>
                     </div>    
                     <div className={classes.Content}>
