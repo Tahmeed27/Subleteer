@@ -56,6 +56,7 @@ const Profile = (props) => {
                     </div>    
                     <div className={classes.Content}>
                         <h1>Here are all your listings</h1>
+                        
                     </div>   
                 </main>
             </div>
