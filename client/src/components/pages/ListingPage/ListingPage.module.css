@@ -1,13 +1,11 @@
 .ListingPage {
-  background-color: red;
   height: 100vh;
   width: 100%;
 }
 
 .Content {
   display: flex;
-  width: 90%;
-  background-color: blue;
+  width: 80%;
   margin: 0 auto;
   height: 600px;
   flex-direction: row;
@@ -16,8 +14,7 @@
 
 .Carousel {
   margin-left: 50px;
-  background-color: white;
-  width: 40%;
+  width: 30%;
   height: 400px;
   border-radius: 20px;
 }
@@ -25,8 +22,7 @@
 .ListingInfo {
   margin-left: 75px;
   width: 40%;
-  height: 80%;
-  background-color: white;
+  height: 90%;
   padding: 20px;
 }
 
@@ -39,7 +35,98 @@
   color: orange;
 }
 
-.List div {
-  margin: 5px;
-  margin-left: 0;
+.List {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+  width: 60%;
+}
+
+.List div em {
+  font-weight: bold;
+  color: black;
+}
+
+.Description {
+  font-size: 16px;
+  max-width: 500px;
+}
+
+.Col {
+  margin-right: 25px;
+}
+
+.Col span {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 1300px) {
+  .Content {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    align-items: center;
+    width: 100%;
+  }
+  .Carousel {
+    margin: 0 auto;
+    height: auto;
+    margin-bottom: 25px;
+    width: 80%;
+  }
+  .ListingPage {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ListingInfo {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+  }
+  .List {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+  .Col {
+    margin: 10px;
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 1300px) and (min-width: 600px) {
+  .Content {
+    flex-direction: column;
+    text-align: center;
+    justify-content: content;
+    height: auto;
+    width: 80%;
+  }
+  .Carousel {
+    margin: 0 auto;
+    height: auto;
+    margin-bottom: 25px;
+    width: 80%;
+  }
+  .ListingPage {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ListingInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    width: 80%;
+  }
+  .List {
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    text-align: center;
+  }
+  .Col {
+    margin: 0;
+    width: 50%;
+  }
 }
