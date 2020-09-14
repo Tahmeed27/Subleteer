@@ -5,6 +5,15 @@
   padding-top: 1rem;
 }
 
+.Logo{
+  width: 200px;
+  height: 100px;
+}
+
+.Logo img{
+  max-width: 100%;
+}
+
 .links {
   display: flex;
   font-size: 1.5rem;

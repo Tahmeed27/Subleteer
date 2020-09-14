@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import * as action from "../../../store/actions/index";
 import classes from "./NavBar.module.css";
 
+import logo from '../../res/Subleteer logo Light.png';
+
 const NavLinkStyle = {
   textDecoration: "none",
   color: "white",
@@ -27,15 +29,19 @@ const NavBar = (props) => {
 
   if (props.isAuthenticated) {
     nav = (
-      <div style={NavLinkStyle} onClick={props.logout}>
+      // <div style={NavLinkStyle} onClick={props.logout}>
+      <NavLink style={NavLinkStyle} to="/profile">
         Hello, {props.username}
-      </div>
+      </NavLink>
+      // </div>
     );
   }
 
   return (
     <div className={classes.navbar}>
-      <div>Logo</div>
+      <div className={classes.Logo}>
+        <img src={logo} alt="Subleteer Logo"/>
+      </div>
       <div className={`${classes.links} ${classes.Welcome}`}>{nav}</div>
     </div>
   );

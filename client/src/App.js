@@ -9,6 +9,7 @@ import AddListings from "./components/pages/AddListings/AddListings";
 
 import * as actions from "./store/actions/index";
 import ListingPage from "./components/pages/ListingPage/ListingPage";
+import ProfilePage from './components/pages/Profile/Profile';
 
 const App = (props) => {
   const { onTryAutoSignup } = props;
@@ -16,6 +17,7 @@ const App = (props) => {
   useEffect(() => {
     onTryAutoSignup();
   }, [onTryAutoSignup]);
+
 
   let routes = (
     <Switch>
@@ -49,6 +51,12 @@ const App = (props) => {
         <Route
           path="/addlisting"
           render={(props) => <AddListings {...props} />}
+          exact
+        />
+        <Route
+          path="/profile"
+          component={ProfilePage}
+          exact
         />
         <Route path="/" exact component={LandingPage} />
         <Redirect to="/" />
