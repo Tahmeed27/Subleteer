@@ -3,6 +3,8 @@ import {useHistory} from 'react-router-dom';
 import classes from './Profile.module.css';
 import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
+import ListingCardProfile from './ListingCardProfile/ListingCardProfile';
+import Footer from '../../UI/Footer/Footer';
 
 const Profile = (props) => {
 
@@ -15,6 +17,30 @@ const Profile = (props) => {
     useEffect(() => {
         getListingsByUserID(userID)
     }, [userID, getListingsByUserID])
+
+    var listings;
+    try{
+        listings = (
+            <div className={classes.Listings}>
+                {userListings.map(listing => {
+                   return (
+                    <ListingCardProfile 
+                        title={listing.title}
+                        price={listing.price}
+                        onClick={() => {
+                            history.push({
+                                pathname:"/updateListing",
+                                state:{listing: listing}
+                            })
+                        }}
+                    />
+                    )
+                })}
+            </div>
+        );
+    }catch(error){
+        console.log(error);
+    }
 
     console.log(userListings, userID);
 
@@ -46,7 +72,6 @@ const Profile = (props) => {
                             <h2>Acount</h2>
                             <p><b>Email: </b>{props.email}</p>
                             <p><b>Number of listings: {userListings.length}</b></p>
-                            <br/>
                         </div>
                         <div className={classes.NewListing}>
                             <h2>Create New Listing</h2>
@@ -55,11 +80,12 @@ const Profile = (props) => {
                         </div>
                     </div>    
                     <div className={classes.Content}>
-                        <h1>Here are all your listings</h1>
-                        
+                        <h1>My Listings</h1>
+                        {listings}
                     </div>   
                 </main>
             </div>
+            <Footer/>
         </>
         
     );

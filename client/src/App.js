@@ -9,6 +9,7 @@ import AddListings from "./components/pages/AddListings/AddListings";
 
 import * as actions from "./store/actions/index";
 import ListingPage from "./components/pages/ListingPage/ListingPage";
+import ProfilePage from './components/pages/Profile/Profile';
 
 const App = (props) => {
   const { onTryAutoSignup } = props;
