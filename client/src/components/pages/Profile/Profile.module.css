@@ -33,6 +33,19 @@
     cursor: pointer;
 }
 
+.Logo{
+    width: 200px;
+    height: 100px;
+}
+
+.Logo img{
+    max-width: 100%;
+}
+
+.Logo:hover{
+    cursor: pointer;
+}
+
 .DPWrapper .ProfilePicture img{
     width: 80%;
     border-radius: 50%;

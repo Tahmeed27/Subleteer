@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import * as actions from '../../../store/actions/index';
 import ListingCardProfile from './ListingCardProfile/ListingCardProfile';
 import Footer from '../../UI/Footer/Footer';
-
+import logo from '../../res/Subleteer logo Dark.png';
 const Profile = (props) => {
 
     const history = useHistory();
@@ -47,8 +47,8 @@ const Profile = (props) => {
     return (
         <>
             <div className={classes.NavBar}>
-                <div>
-                    Logo
+                <div className={classes.Logo} onClick={() => {history.push('/')}}>
+                    <img src={logo} alt="Subleteer logo"/>
                 </div>
                 <div className={classes.NavBarOptions}>
                     <div className={classes.ProfilePicture}>
