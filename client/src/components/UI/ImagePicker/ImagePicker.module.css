@@ -1,0 +1,18 @@
+.FormControl{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.FormControl button{
+    background-color: transparent;
+    border: 1px solid orange;
+    padding: 10px 10px;
+    margin-left: 20px;
+    border-radius: 20px;
+}
+
+.FormControl button:hover{
+    background-color: orange;
+}
