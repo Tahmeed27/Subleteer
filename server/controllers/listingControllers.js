@@ -24,12 +24,16 @@ const getListingsByUserID = async (req,res,next) => {
 
 const createListing = async (req, res, next) => {
     const {title, bedrooms, 
-        price, gender, address,
-        bathrooms, image, userID, description } = req.body;
+        price, gender, addressName, addressLng, addressLat,
+        bathrooms, userID, description } = req.body;
 
-    const lat = address.lat;
-    const lng = address.lng;
-    const addressName = address.name;
+    // console.log(addressLng, addressLat, addressName, title, bedrooms, price, gender, bathrooms, userID, description);
+
+    const image = req.file.path;
+    // console.log(image);
+
+    const lng = Number(addressLng);
+    const lat = Number(addressLat);
 
     const newListing = new Listing({
         title, 

@@ -1,6 +1,6 @@
 const express = require('express');
 const {check} = require('express-validator');
-
+const fileUpload = require('../middleware/file-upload');
 const listingControllers = require('../controllers/listingControllers');
 
 const router = express.Router();
@@ -19,9 +19,9 @@ router.post(
     ], 
     listingControllers.getListingsByFilters);
 
-router.post('/', listingControllers.createListing);
+router.post('/',fileUpload.single('image'), listingControllers.createListing);
 
-router.patch('/', listingControllers.updateListing);
+router.patch('/', fileUpload.single('image'), listingControllers.updateListing);
 
 router.delete('/', listingControllers.deleteListing);
 
