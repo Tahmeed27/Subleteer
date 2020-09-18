@@ -3,13 +3,14 @@ import classes from './AddListings.module.css'
 import FormSearchbar from '../../UI/FormSearchbar/FormSearchbar'
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
+import { connect } from "react-redux";
 import axios from 'axios'
 
 import { Typography, TextField, Grid, Paper, MenuItem, Button } from '@material-ui/core';
 
 
 
-const AddListing = () => {
+const AddListing = ({userID}) => {
     const handleSubmit = () => {
         console.log("Sending this to server: ", eachEntry)
         const url = 'http://localhost:5000/api/listings'
@@ -32,11 +33,10 @@ const AddListing = () => {
         bedrooms: "",
         bathrooms: "",
         // image: ?
-        description: ""
-
+        description: "",
+        userID: userID,
     };
     const history = useHistory()
-    const genderOptions = ["Male", "Female", "Any"]
     const [eachEntry, setEachEntry] = useState(initialInputState);
     const {title, price, gender, bedrooms, bathrooms, description} = eachEntry;
     
@@ -48,7 +48,10 @@ const AddListing = () => {
         const info = {name: value, ...latLng}
         setEachEntry({ ...eachEntry, address: info})
       };
-
+    if (!eachEntry.userID && userID) {
+        setEachEntry({...eachEntry, userID: userID})
+    }
+    
     return (
         <div className={classes.root}>
             <Grid container justify="center" alignItems="center">
@@ -123,18 +126,27 @@ const AddListing = () => {
                                 style={{marginBottom:"1rem"}}
                                 onChange={handleInputChange}
                                 >
-                                    {genderOptions.map(option => (
-                                        <MenuItem key={option} value={option}>
-                                        {option}
-                                        </MenuItem>
-                                    ))}
+                                 <MenuItem value="male">Male Only</MenuItem>  
+                                 <MenuItem value="female">Female Only</MenuItem>  
+                                 <MenuItem value="any">Co-ed</MenuItem>  
                             </TextField>
                         </div>
+                        {/* <input
+                            accept="image/*"
+                            style={{display: "none"}}
+                            id="contained-button-file"
+                            multiple
+                            type="file"
+                        />
+                        <label htmlFor="contained-button-file">
+                            <Button variant="contained" color="primary" component="span">
+                            Upload
+                            </Button>
+                        </label> */}
                         <div style={{display:"flex", justifyContent:"center"}}>
                             <Button onClick={handleSubmit} size="large" variant="contained" style={{color:"#f9f9f9", backgroundColor: "#FFA500"}}>
                             Submit
                             </Button>
-
                         </div>
                     </Paper>
                 </Grid>
@@ -145,4 +157,12 @@ const AddListing = () => {
     )
 }
 
-export default AddListing;
+const mapStateToProps = (state) => {
+    return {
+      userID: state.auth.userId,
+    };
+  };
+  
+  
+export default connect(mapStateToProps)(AddListing);
+
