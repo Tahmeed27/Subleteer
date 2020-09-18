@@ -1,40 +1,60 @@
-import React, { useState } from 'react'
-import classes from './AddListings.module.css'
-import FormSearchbar from '../../UI/FormSearchbar/FormSearchbar'
+import React, { useState } from 'react';
+import {connect} from 'react-redux';
+import classes from './AddListings.module.css';
+import FormSearchbar from '../../UI/FormSearchbar/FormSearchbar';
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
-import axios from 'axios'
-
+import axios from 'axios';
+import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 import { Typography, TextField, Grid, Paper, MenuItem, Button } from '@material-ui/core';
+import * as actions from '../../../store/actions/index';
 
 
-
-const AddListing = () => {
+const AddListing = (props) => {
     const handleSubmit = () => {
         console.log("Sending this to server: ", eachEntry)
         const url = 'http://localhost:5000/api/listings'
 
-        axios.post(url, eachEntry)
+        const formData = new FormData();
+
+        formData.append('title', eachEntry.title);
+        formData.append('price', eachEntry.price);
+        formData.append('addressName', eachEntry.address.name);
+        formData.append('addressLat', eachEntry.address.lat);
+        formData.append('addressLng', eachEntry.address.lng);
+        formData.append('gender', eachEntry.gender);
+        formData.append('bedrooms', eachEntry.bedrooms);
+        formData.append('bathrooms', eachEntry.bathrooms);
+        formData.append('image', eachEntry.image);
+        formData.append('description', eachEntry.description);
+        formData.append('userID', props.userID);
+
+        axios({
+            method: "POST",
+            url: url,
+            data: formData,
+            headers: {'Content-Type': 'multipart/form-data' }
+          })
           .then((response) => {
             console.log(response);
           })
           .catch((error) => {
             console.log(error);
-          })
+          });
         history.push('/results')
     }
 
     const initialInputState = { 
         title: "", 
-        address: "",
+        address: {},
         price: "",
         gender: "",
         bedrooms: "",
         bathrooms: "",
-        // image: ?
+        image: "",
         description: ""
-
     };
+
     const history = useHistory()
     const genderOptions = ["Male", "Female", "Any"]
     const [eachEntry, setEachEntry] = useState(initialInputState);
@@ -42,10 +62,15 @@ const AddListing = () => {
     
     const handleInputChange = e => setEachEntry({ ...eachEntry, [e.target.name]: e.target.value })
 
+    const imageAdded = (image) => {
+        setEachEntry({...eachEntry, image: image});
+    }
+
     const handleSelect = async value => {
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
         const info = {name: value, ...latLng}
+        console.log(info);
         setEachEntry({ ...eachEntry, address: info})
       };
 
@@ -130,6 +155,9 @@ const AddListing = () => {
                                     ))}
                             </TextField>
                         </div>
+
+                        <ImagePicker id="image"  onInput={imageAdded}/>
+
                         <div style={{display:"flex", justifyContent:"center"}}>
                             <Button onClick={handleSubmit} size="large" variant="contained" style={{color:"#f9f9f9", backgroundColor: "#FFA500"}}>
                             Submit
@@ -145,4 +173,17 @@ const AddListing = () => {
     )
 }
 
-export default AddListing;
+const mapStateToProps = (state) => {
+    return {
+      isAuthenticated: state.auth.token !== null,
+      userID: state.auth.userId
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      onAddImage: (imageURL) => dispatch(actions.authAddImage(imageURL))
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddListing);
