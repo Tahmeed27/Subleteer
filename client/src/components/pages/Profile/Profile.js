@@ -49,6 +49,8 @@ const Profile = (props) => {
 
     console.log(userListings, userID);
 
+    var imageLocalStorage = localStorage.getItem("userImage");
+
     return (
         <>
             <div className={classes.NavBar}>
@@ -56,9 +58,11 @@ const Profile = (props) => {
                     <img src={logo} alt="Subleteer logo"/>
                 </div>
                 <div className={classes.NavBarOptions}>
-                    <div className={classes.ProfilePicture}>
-                        <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t31.0-8/12094921_147224075630721_5972001613300631429_o.jpg?_nc_cat=105&_nc_sid=09cbfe&_nc_ohc=hO5LgG-2_kQAX_XcNfU&_nc_ht=scontent-yyz1-1.xx&oh=8d2b5b051795d5664e6f2c08b49b4cc7&oe=5F8297AC" alt="profile"/>
-                    </div>
+                    <Avatar 
+                        src={`http://localhost:5000/${imageLocalStorage}`} 
+                        alt="profile"
+                        style={{ height: '50px', width: '50px', marginRight: "20px"}}
+                    />
                     <p className={classes.Logout} onClick={props.logout}>Logout</p>
                 </div>
             </div>
@@ -68,7 +72,7 @@ const Profile = (props) => {
                     <div className={classes.UserInfo}>
                         <div className={classes.DPWrapper}>
                             <Avatar 
-                                src={`http://localhost:5000/${props.userImage}`} 
+                                src={`http://localhost:5000/${imageLocalStorage}`} 
                                 alt="profile"
                                 style={{ height: '200px', width: '200px' }}
                             />
