@@ -49,7 +49,7 @@ const Profile = (props) => {
 
     console.log(userListings, userID);
 
-    var imageLocalStorage = localStorage.getItem("userImage");
+    const imageLocalStorage = localStorage.getItem("userImage");
 
     return (
         <>
