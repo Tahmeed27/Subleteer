@@ -17,7 +17,6 @@ const Results = (props) => {
     getListings(info);
   }, [getListings, props.location]);
 
-  console.log(props.listings);
 
   const history = useHistory();
 

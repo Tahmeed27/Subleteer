@@ -18,7 +18,6 @@ const LandingSearchbar = () => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
     const info = {name: value, ...latLng}
-
     history.push("/results", {info});
   };
 

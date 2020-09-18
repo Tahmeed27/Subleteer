@@ -9,15 +9,7 @@ router.get('/:uid', listingControllers.getListingsByUserID);
 
 router.post('/address', listingControllers.getListingsByAddress);
 
-router.post(
-    '/filters', 
-    [
-        check('address').notEmpty(),
-        check('price').notEmpty().isInt(),
-        check('bedrooms').isInt({max: 5, min:1}),
-        check('gender').isIn(["male only", "female only", "any"]),
-    ], 
-    listingControllers.getListingsByFilters);
+router.post('/filters', listingControllers.getListingsByFilters);
 
 router.post('/',fileUpload.single('image'), listingControllers.createListing);
 

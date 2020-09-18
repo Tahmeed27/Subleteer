@@ -20,6 +20,8 @@ export const getListingsByFiltersFail = (error) => {
 export const getListingsByFilter = (price, bedrooms, gender, address) => {
   return (dispatch) => {
     let filterData = { price, bedrooms, gender, address };
+    console.log(price,bedrooms, gender, address );
+    
     const url = "http://localhost:5000/api/listings/filters";
     axios
       .post(url, filterData)
