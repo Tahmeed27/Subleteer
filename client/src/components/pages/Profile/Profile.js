@@ -2,10 +2,15 @@ import React, {useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import classes from './Profile.module.css';
 import {connect} from 'react-redux';
+import { Avatar } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import * as actions from '../../../store/actions/index';
 import ListingCardProfile from './ListingCardProfile/ListingCardProfile';
 import Footer from '../../UI/Footer/Footer';
 import logo from '../../res/Subleteer logo Dark.png';
+
+
+
 const Profile = (props) => {
 
     const history = useHistory();
@@ -62,9 +67,14 @@ const Profile = (props) => {
                 <main className={classes.Main}>
                     <div className={classes.UserInfo}>
                         <div className={classes.DPWrapper}>
-                            <div className={classes.ProfilePicture}>
-                                <img src="https://scontent-yyz1-1.xx.fbcdn.net/v/t31.0-8/12094921_147224075630721_5972001613300631429_o.jpg?_nc_cat=105&_nc_sid=09cbfe&_nc_ohc=hO5LgG-2_kQAX_XcNfU&_nc_ht=scontent-yyz1-1.xx&oh=8d2b5b051795d5664e6f2c08b49b4cc7&oe=5F8297AC" alt="profile"/>
-                            </div>
+                            <Avatar 
+                                src={`http://localhost:5000/${props.userImage}`} 
+                                alt="profile"
+                                style={{ height: '200px', width: '200px' }}
+                            />
+                            {/* <div className={classes.ProfilePicture}>
+                                <img src={`http://localhost:5000/${props.userImage}`} alt="profile"/>
+                            </div> */}
                             <p className={classes.Greetings}>Hi, <span style={{fontWeight:"bold"}}>{props.username}</span></p>
                         </div>
                        
@@ -96,6 +106,7 @@ const mapStateToProps = (state) => {
       username: state.auth.username,
       email: state.auth.email,
       userID: state.auth.userId,
+      userImage: state.auth.imageURL,
       userListings: state.listings.listingsByUserID,
     };
   };
