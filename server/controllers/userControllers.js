@@ -16,48 +16,50 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(req.body.password, salt)
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(req.body.password, salt)
 
-    const user = new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: hashPassword
-    })
+  const user = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: hashPassword,
+      image: req.file.path
+  })
 
-    try {
-      await user.save();
-    } catch (err) {
-      const error = new HttpError(
-        'Sign up failed, please try again later.',
-        500
-      );
-      return next(error);
-    }
-  
-    let token;
-    try {
-      token = jwt.sign(
-        { userId: user._id, email: user.email },
-        'supersecret_dont_share',
-        { expiresIn: '1h' }
-      );
-    } catch (err) {
-      const error = new HttpError(
-        'Sign up failed, please try again later.',
-        500
-      );
-      return next(error);
-    }
-  
-    res
-      .status(201)
-      .json({ _id: user._id, username: user.username, email: user.email, token: token });
-  };
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      'Sign up failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+  let token;
+  try {
+    token = jwt.sign(
+      { userId: user._id, email: user.email },
+      'supersecret_dont_share',
+      { expiresIn: '1h' }
+    );
+  } catch (err) {
+    const error = new HttpError(
+      'Sign up failed, please try again later.',
+      500
+    );
+    return next(error);
+  }
+
+  res
+    .status(201)
+    .json({ _id: user._id, username: user.username, email: user.email, image: user.image, token: token });
+};
 
     
 const login = async (req, res, next) => {
     const { email, password } = req.body;
+    console.log(email);
 
     let existingUser;
     existingUser = await User.findOne({ email: email });
@@ -104,12 +106,10 @@ const login = async (req, res, next) => {
       _id: existingUser._id,
       username: existingUser.username,
       email: existingUser.email,
+      image: existingUser.image,
       token: token
     });
-  
-
-
-   // res.json({message: "Successful connection to login existing user"});
+    
 };
 
 exports.signup = signup;
