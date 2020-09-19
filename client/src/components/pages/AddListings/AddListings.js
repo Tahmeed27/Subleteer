@@ -6,8 +6,6 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import ImagePicker from '../../UI/ImagePicker/ImagePicker';
-import { connect } from "react-redux";
-import axios from 'axios'
 
 import { Typography, TextField, Grid, Paper, MenuItem, Button } from '@material-ui/core';
 import * as actions from '../../../store/actions/index';
@@ -77,8 +75,9 @@ const AddListing = (props) => {
         console.log(info);
         setEachEntry({ ...eachEntry, address: info})
       };
-    if (!eachEntry.userID && userID) {
-        setEachEntry({...eachEntry, userID: userID})
+
+    if (!eachEntry.userID && props.userID) {
+        setEachEntry({...eachEntry, userID: props.userID})
     }
     
     return (
