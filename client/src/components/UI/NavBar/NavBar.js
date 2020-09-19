@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import * as action from "../../../store/actions/index";
 import classes from "./NavBar.module.css";
 
+import logo from '../../res/Subleteer logo Light.png';
+
 const NavLinkStyle = {
   textDecoration: "none",
   color: "white",
@@ -37,7 +39,9 @@ const NavBar = (props) => {
 
   return (
     <div className={classes.navbar}>
-      <div>Logo</div>
+      <div className={classes.Logo}>
+        <img src={logo} alt="Subleteer Logo"/>
+      </div>
       <div className={`${classes.links} ${classes.Welcome}`}>{nav}</div>
     </div>
   );
