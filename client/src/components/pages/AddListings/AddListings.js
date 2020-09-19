@@ -6,11 +6,15 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import ImagePicker from '../../UI/ImagePicker/ImagePicker';
+import { connect } from "react-redux";
+import axios from 'axios'
+
 import { Typography, TextField, Grid, Paper, MenuItem, Button } from '@material-ui/core';
 import * as actions from '../../../store/actions/index';
 
 
 const AddListing = (props) => {
+
     const handleSubmit = () => {
         console.log("Sending this to server: ", eachEntry)
         const url = 'http://localhost:5000/api/listings'
@@ -52,11 +56,11 @@ const AddListing = (props) => {
         bedrooms: "",
         bathrooms: "",
         image: "",
-        description: ""
+        description: "",
+        userID: props.userID,
     };
 
     const history = useHistory()
-    const genderOptions = ["Male", "Female", "Any"]
     const [eachEntry, setEachEntry] = useState(initialInputState);
     const {title, price, gender, bedrooms, bathrooms, description} = eachEntry;
     
@@ -73,7 +77,10 @@ const AddListing = (props) => {
         console.log(info);
         setEachEntry({ ...eachEntry, address: info})
       };
-
+    if (!eachEntry.userID && userID) {
+        setEachEntry({...eachEntry, userID: userID})
+    }
+    
     return (
         <div className={classes.root}>
             <Grid container justify="center" alignItems="center">
@@ -148,21 +155,30 @@ const AddListing = (props) => {
                                 style={{marginBottom:"1rem"}}
                                 onChange={handleInputChange}
                                 >
-                                    {genderOptions.map(option => (
-                                        <MenuItem key={option} value={option}>
-                                        {option}
-                                        </MenuItem>
-                                    ))}
+                                 <MenuItem value="male">Male Only</MenuItem>  
+                                 <MenuItem value="female">Female Only</MenuItem>  
+                                 <MenuItem value="any">Co-ed</MenuItem>  
                             </TextField>
                         </div>
 
                         <ImagePicker id="image"  onInput={imageAdded}/>
 
+                        {/* <input
+                            accept="image/*"
+                            style={{display: "none"}}
+                            id="contained-button-file"
+                            multiple
+                            type="file"
+                        />
+                        <label htmlFor="contained-button-file">
+                            <Button variant="contained" color="primary" component="span">
+                            Upload
+                            </Button>
+                        </label> */}
                         <div style={{display:"flex", justifyContent:"center"}}>
                             <Button onClick={handleSubmit} size="large" variant="contained" style={{color:"#f9f9f9", backgroundColor: "#FFA500"}}>
                             Submit
                             </Button>
-
                         </div>
                     </Paper>
                 </Grid>
