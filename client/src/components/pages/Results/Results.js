@@ -1,5 +1,5 @@
 import React, { useEffect, } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { connect } from "react-redux";
 import {useHistory} from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
@@ -14,7 +14,12 @@ const Results = (props) => {
   useEffect(() => {
     console.log(props.location);
     const info = props.location.state ? props.location.state.info : "";
-    getListings(info);
+    const tempAddress = {
+      name: "181 Lester Street, Waterloo",
+      lat: 43.4713576,
+      lng: -80.5347926,
+    }
+    getListings(tempAddress);
   }, [getListings, props.location]);
 
 
