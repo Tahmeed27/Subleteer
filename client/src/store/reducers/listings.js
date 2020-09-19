@@ -7,7 +7,6 @@ const initialState = {
     error: null
 };
 
-
 const reducer = (state = initialState, action) => {
     switch (action.type) {
       case actionTypes.GET_LISTINGS_BY_FILTERS_SUCCESS:
@@ -22,6 +21,5 @@ const reducer = (state = initialState, action) => {
         return state;
     }
 };
-
 
 export default reducer;

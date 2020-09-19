@@ -4,8 +4,13 @@ import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
+<<<<<<< HEAD
 import AddListings from "./components/pages/AddListings/AddListings"
 import ProfilePage from './components/pages/Profile/Profile';
+=======
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import AddListings from "./components/pages/AddListings/AddListings";
+>>>>>>> da942835453f31df4e31e4b18762a72dbe23b37f
 
 import * as actions from "./store/actions/index";
 
@@ -27,9 +32,11 @@ const App = (props) => {
         path="/signup"
         render={(props) => <Auth {...props} isSignUp={true} />}
       />
+      <Route path="/results" render={(props) => <Results {...props} />} />
+
       <Route
-        path="/results"
-        render={(props) => <Results {...props} />}
+        path="/addlisting"
+        render={(props) => <AddListings {...props} />}
       />
       
       <Route
@@ -50,6 +57,11 @@ const App = (props) => {
         exact
         />
         <Route
+          path="/signup"
+          render={(props) => <Auth {...props} isSignUp={true} />}
+        />
+        <Route path="/results" render={(props) => <Results {...props} />} />
+        <Route
           path="/addlisting"
           render={(props) => <AddListings {...props} />}
           exact
@@ -65,7 +77,22 @@ const App = (props) => {
     );
   }
 
-  return <div className="App">{routes}</div>;
+  let theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#fff",
+      },
+      secondary: {
+        main: "#e16d14",
+      },
+    },
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="App">{routes}</div>
+    </ThemeProvider>
+  );
 };
 
 const mapStateToProps = (state) => {
