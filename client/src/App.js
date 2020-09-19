@@ -4,9 +4,11 @@ import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
-import AddListings from "./components/pages/AddListings/AddListings"
-import ProfilePage from './components/pages/Profile/Profile';
+import AddListings from "./components/pages/AddListings/AddListings";
+import ProfilePage from "./components/pages/Profile/Profile";
+import ViewListing from "./components/pages/ListingPage/ListingPage";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+
 import * as actions from "./store/actions/index";
 // import ListingPage from "./components/pages/ListingPage/ListingPage";
 
@@ -16,7 +18,6 @@ const App = (props) => {
   useEffect(() => {
     onTryAutoSignup();
   }, [onTryAutoSignup]);
-
 
   let routes = (
     <Switch>
@@ -34,7 +35,7 @@ const App = (props) => {
         path="/addlisting"
         render={(props) => <AddListings {...props} />}
       />
-      
+
       <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />
     </Switch>
@@ -44,9 +45,9 @@ const App = (props) => {
     routes = (
       <Switch>
         <Route
-        path="/results"
-        render={(props) => <Results {...props} />}
-        exact
+          path="/results"
+          render={(props) => <Results {...props} />}
+          exact
         />
         <Route
           path="/login"
@@ -62,9 +63,10 @@ const App = (props) => {
           render={(props) => <AddListings {...props} />}
           exact
         />
+        <Route path="/profile" component={ProfilePage} exact />
         <Route
-          path="/profile"
-          component={ProfilePage}
+          path="/viewListing"
+          render={(props) => <ViewListing {...props} />}
           exact
         />
         <Route path="/" exact component={LandingPage} />

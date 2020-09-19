@@ -7,11 +7,17 @@ import Typography from "@material-ui/core/Typography";
 import SingleBedIcon from "@material-ui/icons/SingleBed";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import BathtubIcon from "@material-ui/icons/Bathtub";
+import { useHistory } from "react-router-dom";
 
 const ListingCard = (props) => {
+  const history = useHistory();
   return (
-    // {/* <Col> */}
-    <div className={classes.ListingCard}>
+    <div
+      className={classes.ListingCard}
+      onClick={() => {
+        history.push("/viewListing", { listing: props.listing });
+      }}
+    >
       <div className={classes.ImgContainer}>
         <img src={Image} alt="container" />
       </div>
@@ -31,7 +37,6 @@ const ListingCard = (props) => {
         </div>
       </div>
     </div>
-    // </Col>
   );
 };
 
