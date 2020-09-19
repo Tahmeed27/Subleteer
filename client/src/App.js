@@ -4,13 +4,8 @@ import LandingPage from "./components/pages/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
-<<<<<<< HEAD
 import AddListings from "./components/pages/AddListings/AddListings"
 import ProfilePage from './components/pages/Profile/Profile';
-=======
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import AddListings from "./components/pages/AddListings/AddListings";
->>>>>>> da942835453f31df4e31e4b18762a72dbe23b37f
 
 import * as actions from "./store/actions/index";
 
