@@ -15,6 +15,10 @@
   border-radius: 50%;
 }
 
+.NavBarProfileDiv:hover{
+  cursor: pointer;
+}
+
 .NavBar .ProfilePicture img{
   width: 100%;
   border-radius: 50%;

@@ -7,9 +7,8 @@ import Results from "./components/pages/Results/Results";
 import AddListings from "./components/pages/AddListings/AddListings"
 import ProfilePage from './components/pages/Profile/Profile';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import AddListings from "./components/pages/AddListings/AddListings";
 import * as actions from "./store/actions/index";
-import ListingPage from "./components/pages/ListingPage/ListingPage";
+// import ListingPage from "./components/pages/ListingPage/ListingPage";
 
 const App = (props) => {
   const { onTryAutoSignup } = props;
@@ -57,7 +56,7 @@ const App = (props) => {
           path="/signup"
           render={(props) => <Auth {...props} isSignUp={true} />}
         />
-        
+
         <Route
           path="/addlisting"
           render={(props) => <AddListings {...props} />}

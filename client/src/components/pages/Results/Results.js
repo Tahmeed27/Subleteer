@@ -25,15 +25,21 @@ const Results = (props) => {
   return (
     <>
       <div className={classes.NavBar}>
-          <div className={classes.Logo} onClick={() => {history.push('/')}}>
+          <div 
+            className={classes.Logo} 
+            onClick={() => {history.push('/')} }
+          >
               <img src={logo} alt="Subleteer logo"/>
           </div>
           {props.isAuthenticated ? <div className={classes.NavBarOptions}>
-              <Avatar 
-                  src={`http://localhost:5000/${imageLocalStorage}`} 
-                  alt="profile"
-                  style={{ height: '50px', width: '50px', marginRight: "20px"}}
-              />
+              <div onClick={() => {history.push('/profile')}} className={classes.NavBarProfileDiv}>
+                <Avatar 
+                    src={`http://localhost:5000/${imageLocalStorage}`} 
+                    alt="profile"
+                    style={{ height: '50px', width: '50px', marginRight: "20px"}}
+                />            
+              </div>
+  
               <p className={classes.Logout} onClick={props.logout}>Logout</p>
           </div> : <div/>}
       </div>
