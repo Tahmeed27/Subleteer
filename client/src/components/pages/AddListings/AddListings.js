@@ -162,19 +162,7 @@ const AddListing = (props) => {
                         </div>
 
                         <ImagePicker id="image"  onInput={imageAdded}/>
-
-                        {/* <input
-                            accept="image/*"
-                            style={{display: "none"}}
-                            id="contained-button-file"
-                            multiple
-                            type="file"
-                        />
-                        <label htmlFor="contained-button-file">
-                            <Button variant="contained" color="primary" component="span">
-                            Upload
-                            </Button>
-                        </label> */}
+                        
                         <div style={{display:"flex", justifyContent:"center"}}>
                             <Button onClick={handleSubmit} size="large" variant="contained" style={{color:"#f9f9f9", backgroundColor: "#FFA500"}}>
                             Submit
