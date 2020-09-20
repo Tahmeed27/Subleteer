@@ -38,12 +38,12 @@ const UpdateListings = (props) => {
             headers: {'Content-Type': 'multipart/form-data' }
           })
           .then((response) => {
+              history.push('/profile')
             //console.log(response);
           })
           .catch((error) => {
             console.log(error);
           });
-        history.push('/profile')
     }
 
     const listing = props.location.state ? props.location.state.listing : "";
