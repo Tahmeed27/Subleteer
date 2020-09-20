@@ -24,8 +24,10 @@ const ImagePicker = (props) => {
 
     const avatarClasses = useStyles();
 
+    const defaultImage = props.preview ? props.preview : null
+
     const [file, setFile] = useState();
-    const [previewURL, setPreviewURL] = useState();
+    const [previewURL, setPreviewURL] = useState(defaultImage);
     const [isValid, setIsValid] = useState(false);
 
     const filePickerRef = useRef();

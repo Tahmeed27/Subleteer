@@ -12,8 +12,8 @@ import * as actions from "../../../store/actions";
 const Results = (props) => {
   const { getListings } = props;
   useEffect(() => {
-    console.log(props.location);
     const info = props.location.state ? props.location.state.info : "";
+    console.log(info)
     const tempAddress = {
       name: "181 Lester Street, Waterloo",
       lat: 43.4713576,

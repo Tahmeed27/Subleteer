@@ -6,13 +6,15 @@ import { TextField } from '@material-ui/core';
 
 
 
-const FormSearchbar = ({handleSelect}) => {
+const FormSearchbar = ({handleSelect, placeholder}) => {
     const finalHandler = value => {
         setAddress(value)
         handleSelect(value)
     }
 
-  const [address, setAddress] = useState("");
+  const defaultAddress = placeholder ? placeholder : "" 
+
+  const [address, setAddress] = useState(defaultAddress);
   return (
     <div>
       <PlacesAutocomplete

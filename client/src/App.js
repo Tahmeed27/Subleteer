@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { Route, withRouter, Switch, Redirect } from "react-router-dom";
-import LandingPage from "./components/pages/LandingPage";
+import LandingPage from "./components/pages/LandingPage/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
 import AddListings from "./components/pages/AddListings/AddListings"
 import ProfilePage from './components/pages/Profile/Profile';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import UpdateListings from "./components/pages/UpdateListings/UpdateListings"
+
 import * as actions from "./store/actions/index";
 // import ListingPage from "./components/pages/ListingPage/ListingPage";
 
@@ -30,9 +32,15 @@ const App = (props) => {
       />
       <Route path="/results" render={(props) => <Results {...props} />} />
 
+{// remove these routes later
+}
       <Route
         path="/addlisting"
         render={(props) => <AddListings {...props} />}
+      />
+      <Route
+        path="/updatelisting"
+        render={(props) => <UpdateListings {...props} />}
       />
       
       <Route path="/" exact component={LandingPage} />
@@ -67,6 +75,10 @@ const App = (props) => {
           component={ProfilePage}
           exact
         />
+        <Route
+        path="/updatelisting"
+        render={(props) => <UpdateListings {...props} />}
+      />
         <Route path="/" exact component={LandingPage} />
         <Redirect to="/" />
       </Switch>
