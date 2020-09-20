@@ -1,0 +1,54 @@
+.ListingCard{
+    width: 270px;
+    height: 270px;
+    background-color:#ccc;
+    border-radius: 20px;
+    margin: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background-image: url(../../../../assets/181.jpg);
+}
+
+@media screen and (max-width: 450px){
+    .ListingCard{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+.Blur{
+    background: rgba(255, 255, 255, 0.3); 
+    backdrop-filter: blur(3px); 
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.ButtonDiv{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+.EditButton{
+    padding:5px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.EditButton:hover{
+    background-color: black;
+    color: white;
+}

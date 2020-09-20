@@ -2,12 +2,11 @@ import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import LandingCard from "../../UI/LandingCard/LandingCard";
-import Footer from '../../UI/Footer/Footer';
-import LandingSearchbar from "../../UI/LandingSearchbar/LandingSearchbar";
-import Navbar from '../../UI/NavBar/NavBar';
-import Grid from '@material-ui/core/Grid';
-
+import LandingCard from "../UI/LandingCard/LandingCard";
+import Footer from "../UI/Footer/Footer";
+import LandingSearchbar from "../UI/LandingSearchbar/LandingSearchbar";
+import Navbar from "../UI/NavBar/NavBar";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "20px"
+    marginTop: "20px",
   },
   lowerText: {
     padding: "1.5rem",
@@ -69,8 +68,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "2rem",
   },
   gridContainer: {
-    marginBottom: "2rem"
-  }
+    marginBottom: "2rem",
+  },
 }));
 
 const LandingPage = () => {
@@ -79,7 +78,7 @@ const LandingPage = () => {
   return (
     <div className={classes.root}>
       <div className={classes.hero}>
-        <Navbar/>
+        <Navbar />
         <div className={classes.centerDiv}>
           <div className={classes.titleText}>Subleteer</div>
           <div className={classes.bodyText}>Find your ideal sublet</div>
@@ -90,30 +89,35 @@ const LandingPage = () => {
         <Typography variant="h4" className={classes.lowerText}>
           Why Subleteer?
         </Typography>
-        <Grid className={classes.gridContainer} container spacing={1} justify="center" >
+        <Grid
+          className={classes.gridContainer}
+          container
+          spacing={1}
+          justify="center"
+        >
           <Grid item />
-          <Grid item xs={8} md={3} >
-            <LandingCard 
+          <Grid item xs={8} md={3}>
+            <LandingCard
               title="Location"
               description="Find sublets in any city with a simple search.
               No need to find different sublet groups anymore."
             />
           </Grid>
-          <Grid item xs={8} md={3} >
-            <LandingCard 
+          <Grid item xs={8} md={3}>
+            <LandingCard
               title="Filters"
               description="Filter sublets by different factors to get the best matches quickly. Find exactly what you're looking for."
             />
           </Grid>
           <Grid item xs={8} md={3}>
-            <LandingCard 
-               title = "Ratings"
-            description="View building reviews before signing your sublet. No unpleasant surprises when moving in."
+            <LandingCard
+              title="Ratings"
+              description="View building reviews before signing your sublet. No unpleasant surprises when moving in."
             />
           </Grid>
           <Grid item />
         </Grid>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

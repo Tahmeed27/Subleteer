@@ -7,6 +7,8 @@ const initialState = {
   error: null,
   loading: false,
   username: null,
+  email: null,
+  imageURL: null,
   authRedirectPath: "/",
 };
 
@@ -19,8 +21,10 @@ const authSuccess = (state, action) => {
     token: action.idToken,
     userId: action.userId,
     username: action.username,
+    email: action.email,
+    imageURL: action.image,
     error: null,
-    loading: false,
+    loading: false
   });
 };
 
@@ -39,6 +43,10 @@ const setAuthRedirectedPath = (state, action) => {
   return updateObject(state, { authRedirectPath: action.path });
 };
 
+const authAddImage = (state, action) => {
+  return updateObject(state, {imageURL: action.imageURL});
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -51,6 +59,8 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action);
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectedPath(state, action);
+    case actionTypes.AUTH_ADD_IMAGE:
+      return authAddImage(state, action);
     default:
       return state;
   }

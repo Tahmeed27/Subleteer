@@ -20,6 +20,8 @@ export const getListingsByFiltersFail = (error) => {
 export const getListingsByFilter = (price, bedrooms, gender, address) => {
   return (dispatch) => {
     let filterData = { price, bedrooms, gender, address };
+    console.log(price,bedrooms, gender, address );
+    
     const url = "http://localhost:5000/api/listings/filters";
     axios
       .post(url, filterData)
@@ -39,6 +41,33 @@ export const getListingsByAddressStart = () => {
   };
 };
 
+
+export const getListingsByUserIDSuccess = listings => {
+  return {
+    type: actionTypes.GET_LISTINGS_BY_USERID_SUCCESS,
+    listings: listings
+  }
+}
+
+export const getListingsByUserIDFail = error => {
+  return {
+    type: actionTypes.GET_LISTINGS_BY_USERID_FAIL,
+    error: error
+  }
+}
+
+export const getListingsByUserID = (userID) => {
+  return dispatch => {
+    const url = "http://localhost:5000/api/listings/"+userID
+    axios.get(url)
+    .then(response => {
+      dispatch(getListingsByUserIDSuccess(response.data.listings))
+    })
+    .catch(error => {
+      dispatch(getListingsByUserIDFail(error))
+    });
+  }
+}
 export const getListingsByAddressSuccess = (listings) => {
   return {
     type: actionTypes.GET_LISTINGS_BY_FILTERS_SUCCESS,

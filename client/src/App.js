@@ -4,11 +4,14 @@ import LandingPage from "./components/pages/LandingPage/LandingPage";
 import { connect } from "react-redux";
 import Auth from "./components/Auth/Auth";
 import Results from "./components/pages/Results/Results";
+import AddListings from "./components/pages/AddListings/AddListings"
+import ProfilePage from './components/pages/Profile/Profile';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import AddListings from "./components/pages/AddListings/AddListings";
 import UpdateListings from "./components/pages/UpdateListings/UpdateListings"
 
 import * as actions from "./store/actions/index";
+// import ListingPage from "./components/pages/ListingPage/ListingPage";
 
 const App = (props) => {
   const { onTryAutoSignup } = props;
@@ -16,6 +19,7 @@ const App = (props) => {
   useEffect(() => {
     onTryAutoSignup();
   }, [onTryAutoSignup]);
+
 
   let routes = (
     <Switch>
@@ -39,6 +43,7 @@ const App = (props) => {
         path="/updatelisting"
         render={(props) => <UpdateListings {...props} />}
       />
+      
       <Route path="/" exact component={LandingPage} />
       <Redirect to="/" />
     </Switch>
@@ -48,6 +53,11 @@ const App = (props) => {
     routes = (
       <Switch>
         <Route
+        path="/results"
+        render={(props) => <Results {...props} />}
+        exact
+        />
+        <Route
           path="/login"
           render={(props) => <Auth {...props} isSignUp={false} />}
         />
@@ -55,10 +65,16 @@ const App = (props) => {
           path="/signup"
           render={(props) => <Auth {...props} isSignUp={true} />}
         />
-        <Route path="/results" render={(props) => <Results {...props} />} />
+
         <Route
           path="/addlisting"
           render={(props) => <AddListings {...props} />}
+          exact
+        />
+        <Route
+          path="/profile"
+          component={ProfilePage}
+          exact
         />
         <Route
         path="/updatelisting"

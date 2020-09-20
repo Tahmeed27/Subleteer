@@ -1,0 +1,161 @@
+.NavBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 25px;
+    height: 100px;
+    box-shadow:  0 4px 2px -2px lightgray;
+}
+
+.NavBar .ProfilePicture{
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.NavBar .ProfilePicture img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.NavBarOptions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.NavBarOptions p{
+    margin-bottom: 0px;
+}
+
+.Logout:hover{
+    cursor: pointer;
+}
+
+.Logo{
+    width: 200px;
+    height: 100px;
+}
+
+.Logo img{
+    max-width: 100%;
+}
+
+.Logo:hover{
+    cursor: pointer;
+}
+
+.DPWrapper .ProfilePicture img{
+    width: 80%;
+    border-radius: 50%;
+}
+
+.Profile{
+    margin: 0% 5%;
+    margin-bottom: 50px;
+}
+
+.Main{
+    display: flex;
+}
+
+@media screen and (max-width: 450px){
+    .Main{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.UserInfo{
+    width: 25%;
+    height: 80vh;
+    margin-top: 50px;
+    border-radius: 25px;
+    box-shadow:   -1px -1px 1px 2px #ccc;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+}
+
+@media screen and (max-width: 450px){
+    .UserInfo{
+        width: 90%;
+    }
+}
+
+.DPWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px double orange;
+}
+
+.UserInfo .ProfilePicture{
+    width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+    margin-right: 25px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.Greetings{
+    font-size: 1.5rem;
+}
+
+.Acount{
+    padding-top: 10px;
+    border-bottom: 2px double orange;
+}
+
+.NewListing{
+    padding-top: 10px;
+}
+
+.NewListing p{
+    color: #333;
+}
+
+.NewListing button{
+    background-color: transparent;
+    border: 2px solid orange;
+    border-radius: 20px;
+    padding: 10px 10px;
+    font-size: 1.2em;
+}
+
+.NewListing button:hover{
+    background-color: orange;
+}
+
+.Content{
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+@media screen and (max-width: 450px){
+    .Content{
+        margin-left: 0px;
+        text-align: center;
+    }
+}
+
+.Content h1{
+    margin-bottom: 40px;
+}
+
+.Listings{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 450px){
+    .Listings{
+        justify-content: center;
+        align-items: center;
+    }
+}

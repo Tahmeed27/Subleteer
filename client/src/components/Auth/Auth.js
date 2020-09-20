@@ -9,6 +9,7 @@ import Spinner from "../UI/Spinner/Spinner";
 import Button from "../UI/Button/Button";
 import classes from "./Auth.module.css";
 import Graphic from '../res/Login Graphic.png';
+import ImagePicker from '../UI/ImagePicker/ImagePicker';
 
 const Auth = (props) => {
   const [authForm, setAuthForm] = useState({
@@ -70,8 +71,9 @@ const Auth = (props) => {
 
   const submitHandler = (event) => {
     console.log("submitted");
+    console.log(authForm.email.value); //TODO: Incorrect email being sent to backend
     event.preventDefault();
-    props.onAuth(authForm.email.value, authForm.password.value, props.isSignUp, authForm.username.value);
+    props.onAuth(authForm.email.value, authForm.password.value, props.isSignUp, authForm.username.value, props.image);
   };
 
   const signupArray = [];
@@ -109,6 +111,15 @@ const Auth = (props) => {
       changed={(event) => inputChangedHandler(event, formElement.id)}
     />
   ));
+
+  if (props.isSignUp){
+    form.push((
+    <ImagePicker 
+      id="image"
+      onInput={props.onAddImage}
+    />))
+  }
+
   if (props.loading) {
     form = <Spinner />;
   }
@@ -132,6 +143,8 @@ const Auth = (props) => {
     <p style={{color:"#707070"}}>Don't have an account? Signup <a href="/signup">here</a></p>
   );
 
+  console.log("rendered");
+  
   return (
     <>
       <div className={classes.AuthPage}>
@@ -167,14 +180,16 @@ const mapStateToProps = (state) => {
     error: state.auth.error,
     isAuthenticated: state.auth.token !== null,
     authRedirectPath: state.auth.authRedirectPath,
+    image: state.auth.imageURL
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (email, password, username, isSignup) =>
-      dispatch(actions.auth(email, password, username, isSignup)),
+    onAuth: (email, password, username, isSignup, image) =>
+      dispatch(actions.auth(email, password, username, isSignup, image)),
     onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectedPath("/")),
+    onAddImage: (imageURL) => dispatch(actions.authAddImage(imageURL))
   };
 };
 
