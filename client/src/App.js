@@ -7,7 +7,6 @@ import Results from "./components/pages/Results/Results";
 import AddListings from "./components/pages/AddListings/AddListings"
 import ProfilePage from './components/pages/Profile/Profile';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import AddListings from "./components/pages/AddListings/AddListings";
 import UpdateListings from "./components/pages/UpdateListings/UpdateListings"
 
 import * as actions from "./store/actions/index";

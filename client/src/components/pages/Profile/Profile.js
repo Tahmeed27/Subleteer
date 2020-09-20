@@ -32,11 +32,9 @@ const Profile = (props) => {
                     <ListingCardProfile 
                         title={listing.title}
                         price={listing.price}
+                    
                         onClick={() => {
-                            history.push({
-                                pathname:"/updateListing",
-                                state:{listing: listing}
-                            })
+                            history.push("/updateListing", {listing})
                         }}
                     />
                     )
@@ -46,8 +44,6 @@ const Profile = (props) => {
     }catch(error){
         console.log(error);
     }
-
-    console.log(userListings, userID);
 
     const imageLocalStorage = localStorage.getItem("userImage");
 

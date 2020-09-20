@@ -2,10 +2,10 @@ import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import LandingCard from "../UI/LandingCard/LandingCard";
-import Footer from "../UI/Footer/Footer";
-import LandingSearchbar from "../UI/LandingSearchbar/LandingSearchbar";
-import Navbar from "../UI/NavBar/NavBar";
+import LandingCard from "../../UI/LandingCard/LandingCard";
+import Footer from "../../UI/Footer/Footer";
+import LandingSearchbar from "../../UI/LandingSearchbar/LandingSearchbar";
+import Navbar from "../../UI/NavBar/NavBar";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({

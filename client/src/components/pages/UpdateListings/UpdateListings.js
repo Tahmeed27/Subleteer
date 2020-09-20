@@ -5,44 +5,70 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import axios from 'axios'
-import EditableLabel from 'react-inline-editing';
+import ImagePicker from '../../UI/ImagePicker/ImagePicker';
 
 import { Typography, TextField, Grid, Paper, MenuItem, Button } from '@material-ui/core';
 
 
 
-const UpdateListings = ({userID}) => {
+const UpdateListings = (props) => {
     const handleSubmit = () => {
         console.log("Sending this to server: ", eachEntry)
         const url = 'http://localhost:5000/api/listings'
 
-        axios.post(url, eachEntry)
+        const formData = new FormData();
+
+        formData.append('title', eachEntry.title);
+        formData.append('price', eachEntry.price);
+        formData.append('addressName', eachEntry.address.name);
+        formData.append('addressLat', eachEntry.address.lat);
+        formData.append('addressLng', eachEntry.address.lng);
+        formData.append('gender', eachEntry.gender);
+        formData.append('bedrooms', eachEntry.bedrooms);
+        formData.append('bathrooms', eachEntry.bathrooms);
+        formData.append('image', eachEntry.image);
+        formData.append('description', eachEntry.description);
+        formData.append('listingID', listing._id);
+        formData.append('userID', props.userID);
+
+        axios({
+            method: "PATCH",
+            url: url,
+            data: formData,
+            headers: {'Content-Type': 'multipart/form-data' }
+          })
           .then((response) => {
-            console.log(response);
+            //console.log(response);
           })
           .catch((error) => {
             console.log(error);
-          })
-        history.push('/results')
+          });
+        history.push('/profile')
     }
 
+    const listing = props.location.state ? props.location.state.listing : "";
+
     const initialInputState = { 
-        title: "", 
-        address: "",
-        price: "",
-        gender: "",
-        bedrooms: "",
-        bathrooms: "",
-        // image: ?
-        description: "",
-        userID: userID,
+        title: listing.title, 
+        address: listing.address,
+        price: listing.price,
+        gender: listing.gender,
+        bedrooms: listing.bedrooms,
+        bathrooms: listing.bathrooms,
+        image: listing.image,
+        description: listing.description,
+        userID: props.userID,
     };
+
     const history = useHistory()
     const [eachEntry, setEachEntry] = useState(initialInputState);
-    const {title, price, gender, bedrooms, bathrooms, description} = eachEntry;
+    const {title, address, price, gender, bedrooms, bathrooms, image, description} = eachEntry;
     
     const handleInputChange = e => setEachEntry({ ...eachEntry, [e.target.name]: e.target.value })
-    const handleChange = (text, name) => setEachEntry({...eachEntry, name: text})
+
+    const imageAdded = (image) => {
+        setEachEntry({...eachEntry, image: image});
+    }
 
     const handleSelect = async value => {
         const results = await geocodeByAddress(value);
@@ -50,8 +76,9 @@ const UpdateListings = ({userID}) => {
         const info = {name: value, ...latLng}
         setEachEntry({ ...eachEntry, address: info})
       };
-    if (!eachEntry.userID && userID) {
-        setEachEntry({...eachEntry, userID: userID})
+
+    if (!eachEntry.userID && props.userID) {
+        setEachEntry({...eachEntry, userID: props.userID})
     }
     
     return (
@@ -60,9 +87,7 @@ const UpdateListings = ({userID}) => {
                 <Grid item xs />
                 <Grid item xs={10} md={6}>
                     <Paper className={classes.formContainer}>
-                        <Typography className={classes.titleText} variant="h3" align="center">Update Listing</Typography>
-                        <EditableLabel name="title" value={title} text="This is my title" onFocusOut={(text) => handleChange(text,"title")}/>
-                      
+                        <Typography className={classes.titleText} variant="h3" align="center">Update your Listing</Typography>
                         <TextField
                             name="title"
                             label="Title"
@@ -72,7 +97,7 @@ const UpdateListings = ({userID}) => {
                             onChange={handleInputChange}
                             style={{marginBottom:"1rem"}}
                         />
-                        <FormSearchbar handleSelect={handleSelect} />
+                        <FormSearchbar placeholder={address} handleSelect={handleSelect} />
                         <TextField
                             name="description"
                             label="Description"
@@ -135,21 +160,12 @@ const UpdateListings = ({userID}) => {
                                  <MenuItem value="any">Co-ed</MenuItem>  
                             </TextField>
                         </div>
-                        {/* <input
-                            accept="image/*"
-                            style={{display: "none"}}
-                            id="contained-button-file"
-                            multiple
-                            type="file"
-                        />
-                        <label htmlFor="contained-button-file">
-                            <Button variant="contained" color="primary" component="span">
-                            Upload
-                            </Button>
-                        </label> */}
+
+                        <ImagePicker id="image"  preview={image} onInput={imageAdded}/>
+                        
                         <div style={{display:"flex", justifyContent:"center"}}>
                             <Button onClick={handleSubmit} size="large" variant="contained" style={{color:"#f9f9f9", backgroundColor: "#FFA500"}}>
-                            Submit
+                            Update
                             </Button>
                         </div>
                     </Paper>
