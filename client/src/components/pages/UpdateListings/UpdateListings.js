@@ -20,9 +20,6 @@ const UpdateListings = (props) => {
 
         formData.append('title', eachEntry.title);
         formData.append('price', eachEntry.price);
-        formData.append('addressName', eachEntry.address.name);
-        formData.append('addressLat', eachEntry.address.lat);
-        formData.append('addressLng', eachEntry.address.lng);
         formData.append('gender', eachEntry.gender);
         formData.append('bedrooms', eachEntry.bedrooms);
         formData.append('bathrooms', eachEntry.bathrooms);
@@ -166,7 +163,12 @@ const UpdateListings = (props) => {
                             </TextField>
                         </div>
 
-                        <ImagePicker id="image"  preview={image} onInput={imageAdded}/>
+                        <ImagePicker   
+                            id="image"  
+                            preview={image} 
+                            onInput={imageAdded}
+                            image={listing.image}
+                        />
                         
                         <div style={{display:"flex", justifyContent:"center"}}>
                             <Button onClick={handleSubmit} size="large" variant="contained" style={{color:"#f9f9f9", backgroundColor: "#FFA500"}}>

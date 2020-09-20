@@ -18,6 +18,7 @@ const Content = (props) => {
       bathrooms={listing.bathrooms}
       price={listing.price}
       onClick = {() => {
+        console.log()
         history.push('/viewListing', listing);
       }}
     />

@@ -10,7 +10,6 @@ import BathtubIcon from "@material-ui/icons/Bathtub";
 
 const ListingCard = (props) => {
   return (
-    // {/* <Col> */}
     <div className={classes.ListingCard}>
       <div className={classes.ImgContainer}>
         <img src={Image} alt="container" />

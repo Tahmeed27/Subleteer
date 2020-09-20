@@ -16,3 +16,7 @@
 .FormControl button:hover{
     background-color: orange;
 }
+
+.FallBackImage{
+    max-height: 100%;
+}

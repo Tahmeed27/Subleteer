@@ -239,8 +239,9 @@ const getListingsByFilters = async (req, res, next) => {
 const updateListing = async (req, res, next) => {
     
     const {title, bedrooms, price, 
-        gender, bathrooms, image, 
-        description, listingID} = req.body;
+        gender, bathrooms, description, listingID} = req.body;
+
+    const image = req.file.path;
 
     let listing;
 

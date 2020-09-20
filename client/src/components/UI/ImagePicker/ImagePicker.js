@@ -73,8 +73,10 @@ const ImagePicker = (props) => {
                 accept=".jpg, .jpeg, .png" 
                 ref={filePickerRef}
                 onChange={pickedHandler}
-                />
-            <Avatar alt="Preview" src={previewURL} className={classes.Avatar} style={{ height: '100px', width: '100px' }} />
+            />
+            <Avatar alt="Preview" src={previewURL} className={classes.Avatar} style={{ height: '100px', width: '100px' }}>
+                <img className={classes.FallBackImage} src={`http://localhost:5000/${props.image}`} alt="Current Picture"/>
+            </Avatar>
             <button type="button" onClick={pickImageHandler}>Pick Image</button>
         </div>
     );
