@@ -47,10 +47,15 @@ const UpdateListings = (props) => {
     }
 
     const listing = props.location.state ? props.location.state.listing : "";
+    const defAddress = {
+        name: listing.address,
+        lat: listing.location.coordinates[1],
+        lng: listing.location.coordinates[0],
+    }
 
     const initialInputState = { 
         title: listing.title, 
-        address: listing.address,
+        address: defAddress,
         price: listing.price,
         gender: listing.gender,
         bedrooms: listing.bedrooms,
@@ -97,7 +102,7 @@ const UpdateListings = (props) => {
                             onChange={handleInputChange}
                             style={{marginBottom:"1rem"}}
                         />
-                        <FormSearchbar placeholder={address} handleSelect={handleSelect} />
+                        <FormSearchbar placeholder={address.name} handleSelect={handleSelect} />
                         <TextField
                             name="description"
                             label="Description"
