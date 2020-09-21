@@ -1,4 +1,4 @@
-import React, { useEffect, } from "react";
+import React, { useEffect, useState} from "react";
 // import axios from "axios";
 import { connect } from "react-redux";
 import {useHistory} from 'react-router-dom';
@@ -7,21 +7,40 @@ import classes from "./Results.module.css";
 import FilterSection from "../../UI/ResultsFilters/ResultsFilters";
 import logo from '../../res/Subleteer logo Dark.png';
 import Content from "./Content/Content";
+import { faFrownOpen} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as actions from "../../../store/actions";
 
 const Results = (props) => {
   const { getListings } = props;
+  
+  const [searchAddress, setSearchAddress] = useState(); //This is the address that the user currently wants the results for
+
   useEffect(() => {
     const info = props.location.state ? props.location.state.info : "";
-    console.log(info)
+    
     const tempAddress = {
       name: "181 Lester Street, Waterloo",
       lat: 43.4713576,
       lng: -80.5347926,
     }
-    getListings(tempAddress);
+    if(info === ""){
+      getListings(tempAddress);
+      setSearchAddress(tempAddress);
+    }else{
+      getListings(info);
+      setSearchAddress(info);
+    }
+    
   }, [getListings, props.location]);
 
+  const noListingsFound = (
+    <div className={classes.NoListings}>
+      <FontAwesomeIcon icon={faFrownOpen} size="10x" className={classes.Icon}/>
+      <h1>Uh Oh!</h1>
+      <h2>Looks like no one is subletting with these requirements yet, check again later.</h2>
+    </div>
+  );
 
   const history = useHistory();
 
@@ -49,9 +68,13 @@ const Results = (props) => {
           </div> : <div/>}
       </div>
       <div className={classes.Container}>
-        <FilterSection />
+        <FilterSection address ={searchAddress}/>
         <div className={classes.Content}>
-          <Content listings={props.listings} />
+          <h1 className={classes.ResultsHeader}>Results:</h1>
+          { props.listings.length !== 0 ?  
+            <Content listings={props.listings} /> : 
+            noListingsFound
+          }
         </div>
       </div>
     </>

@@ -176,7 +176,7 @@ const getListingsByFilters = async (req, res, next) => {
                 },
       "bedrooms": {
                     bedrooms: {
-                        $eq: bedrooms
+                        $lte: bedrooms
                     }
                 },
       "gender": {

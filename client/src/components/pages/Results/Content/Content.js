@@ -3,10 +3,6 @@ import {useHistory} from 'react-router-dom';
 import ListingCard from "../../../UI/ListingCard/ListingCard";
 import classes from "./Content.module.css";
 
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
-
 const Content = (props) => {
 
   const history = useHistory();
@@ -21,8 +17,13 @@ const Content = (props) => {
         console.log()
         history.push('/viewListing', listing);
       }}
+      image = {listing.image}
+      address = {listing.address}
+      seller = {listing.user}
+      gender = {listing.gender}
     />
   ));
+
   return <div className={classes.Container}>{listingCards}</div>;
 };
 

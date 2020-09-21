@@ -55,9 +55,36 @@
   background-color: white;
   width: 80%;
   margin: 0 auto;
+  text-align: start;
+}
+
+.ResultsHeader{
+  padding-left: 20px;
 }
 
 .Container {
   text-align: center;
   display: flex;
+}
+
+.NoListings{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 100px 100px;
+}
+
+.Icon{
+  margin-bottom: 20px;
+}
+
+.NoListings h1{
+  margin-bottom: 10px;
+}
+
+.NoListings h2{
+  text-align: center;
+  width: 80%;
+  line-height: 40px;
 }

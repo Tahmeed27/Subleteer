@@ -75,7 +75,7 @@ const ImagePicker = (props) => {
                 onChange={pickedHandler}
             />
             <Avatar alt="Preview" src={previewURL} className={classes.Avatar} style={{ height: '100px', width: '100px' }}>
-                <img className={classes.FallBackImage} src={`http://localhost:5000/${props.image}`} alt="Current Picture"/>
+                <img className={classes.FallBackImage} src={`http://localhost:5000/${props.image}`} alt="Picture"/>
             </Avatar>
             <button type="button" onClick={pickImageHandler}>Pick Image</button>
         </div>

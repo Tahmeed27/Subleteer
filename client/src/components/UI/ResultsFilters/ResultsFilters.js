@@ -17,6 +17,7 @@ const ResultsFilters = (props) => {
     const [price, setPrice] = useState(500);
     const[bedrooms, setBedrooms] = useState(1);
 
+
     const handleGenderChange = (event) => {
         setGender(event.target.value);
     };
@@ -71,6 +72,7 @@ const ResultsFilters = (props) => {
     ];
 
     const handleSearchFilters = async () => {
+        console.log(props.address);
         await props.getListingsByFilters(price, bedrooms, gender, props.address);
     }
 

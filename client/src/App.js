@@ -8,6 +8,7 @@ import AddListings from "./components/pages/AddListings/AddListings"
 import ProfilePage from './components/pages/Profile/Profile';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import UpdateListings from "./components/pages/UpdateListings/UpdateListings"
+import ListingPage from './components/pages/ListingPage/ListingPage';
 
 import * as actions from "./store/actions/index";
 // import ListingPage from "./components/pages/ListingPage/ListingPage";
@@ -32,12 +33,16 @@ const App = (props) => {
       />
       <Route path="/results" render={(props) => <Results {...props} />} />
 
-{// remove these routes later
-}
       <Route
         path="/addlisting"
         render={(props) => <AddListings {...props} />}
       />
+
+      <Route
+        path="/viewListing"
+        render={(props) => <ListingPage {...props} />}
+      />
+
       <Route
         path="/updatelisting"
         render={(props) => <UpdateListings {...props} />}
@@ -64,7 +69,10 @@ const App = (props) => {
           path="/signup"
           render={(props) => <Auth {...props} isSignUp={true} />}
         />
-
+        <Route
+          path="/viewListing"
+          render={(props) => <ListingPage {...props} />}
+        />
         <Route
           path="/addlisting"
           render={(props) => <AddListings {...props} />}
@@ -76,9 +84,9 @@ const App = (props) => {
           exact
         />
         <Route
-        path="/updatelisting"
-        render={(props) => <UpdateListings {...props} />}
-      />
+          path="/updatelisting"
+          render={(props) => <UpdateListings {...props} />}
+        />
         <Route path="/" exact component={LandingPage} />
         <Redirect to="/" />
       </Switch>

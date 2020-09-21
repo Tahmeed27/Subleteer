@@ -1,32 +1,58 @@
 import React from "react";
-
 import classes from "./ListingCard.module.css";
-import Image from "../../../assets/181.jpg";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import SingleBedIcon from "@material-ui/icons/SingleBed";
-import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
-import BathtubIcon from "@material-ui/icons/Bathtub";
+import { faVenusMars} from '@fortawesome/free-solid-svg-icons'
+import { faBath} from '@fortawesome/free-solid-svg-icons'
+import { faBed} from '@fortawesome/free-solid-svg-icons'
+import { faUser} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ListingCard = (props) => {
+  
   return (
-    <div className={classes.ListingCard}>
+    <div className={classes.ListingTile} onClick={props.onClick}>
       <div className={classes.ImgContainer}>
-        <img src={Image} alt="container" />
+        <img 
+          src={`http://localhost:5000/${props.image}`} 
+          alt="container" 
+        />
       </div>
-      <div className={classes.Title}>{props.title}</div>
-      <div className={classes.Icons}>
-        <div className={classes.Icon}>
-          <AttachMoneyIcon fontSize="large" color="secondary" />
-          <div className={classes.Value}>{props.price}</div>
+      <div className={classes.ContentWrapper}>
+        <div className={classes.Content}>
+          <p>For Sale</p>
+          <h1>{props.title}</h1>
+          <p>{props.address}</p>
+          <div className={classes.Row}>
+            <p>$ {props.price}</p>
+            <button>Contact Seller</button>
+          </div>
         </div>
-        <div className={classes.Icon}>
-          <SingleBedIcon fontSize="large" color="secondary" />
-          <div className={classes.Value}>{props.bedrooms}</div>
-        </div>
-        <div className={classes.Icon}>
-          <BathtubIcon fontSize="large" color="secondary" />
-          <div className={classes.Value}>{props.bathrooms}</div>
+        <div className={classes.Footer}>
+          <div className={classes.FooterLeft}>
+            <div className={classes.Feature}>
+              <div className={classes.Icon}>
+                <FontAwesomeIcon icon={faBed} />
+              </div>
+              <p>{props.bedrooms}</p>
+            </div>
+            <div className={classes.Feature}>
+              <div className={classes.Icon}>
+                <FontAwesomeIcon icon={faBath} />
+              </div>
+              <p>{props.bathrooms}</p>
+            </div>
+            <div className={classes.Feature}>
+              <div className={classes.Icon}>
+                <FontAwesomeIcon icon={faVenusMars} />
+              </div>
+              <p>{props.gender}</p>
+            </div>
+          </div>
+          <div className={classes.FooterRight}>
+            <div className={classes.Icon}>
+              <FontAwesomeIcon icon={faUser} />
+            </div>
+            <p>{props.seller.username}</p>
+          </div>
         </div>
       </div>
     </div>

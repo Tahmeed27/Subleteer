@@ -30,12 +30,10 @@ const Profile = (props) => {
                 {userListings.map(listing => {
                    return (
                     <ListingCardProfile 
-                        title={listing.title}
-                        price={listing.price}
-                    
                         onClick={() => {
                             history.push("/updateListing", {listing})
                         }}
+                        listing = {listing}
                     />
                     )
                 })}
