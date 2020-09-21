@@ -1,0 +1,30 @@
+.root {
+    background-color: #f9f9f9;
+}
+
+.formContainer {
+    margin: auto;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    padding: 2rem 3rem;
+}
+
+.titleText {
+    padding: 2rem;
+}
+
+.labelContainer {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.fontText {
+    font-size: 1.5em;
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.fontLabel {
+    margin:0;
+    padding-top:0.2rem;
+}
