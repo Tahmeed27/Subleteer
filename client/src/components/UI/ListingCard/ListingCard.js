@@ -5,11 +5,17 @@ import { faBath} from '@fortawesome/free-solid-svg-icons'
 import { faBed} from '@fortawesome/free-solid-svg-icons'
 import { faUser} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {useHistory} from 'react-router-dom';
 
 const ListingCard = (props) => {
-  
+  const history = useHistory();
   return (
-    <div className={classes.ListingTile} onClick={props.onClick}>
+    <div
+      className={classes.ListingCard}
+      onClick={() => {
+        history.push("/viewListing", { listing: props.listing });
+      }}
+    >
       <div className={classes.ImgContainer}>
         <img 
           src={`http://localhost:5000/${props.image}`} 
@@ -56,7 +62,6 @@ const ListingCard = (props) => {
         </div>
       </div>
     </div>
-    // </Col>
   );
 };
 

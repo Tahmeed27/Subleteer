@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 import ListingCard from "../../../UI/ListingCard/ListingCard";
 import classes from "./Content.module.css";
 
+
 const Content = (props) => {
 
   const history = useHistory();
