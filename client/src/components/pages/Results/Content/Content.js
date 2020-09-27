@@ -14,7 +14,7 @@ const Content = (props) => {
       bathrooms={listing.bathrooms}
       price={listing.price}
       onClick = {() => {
-        console.log()
+        console.log("pushing this to listing page, ", history);
         history.push('/viewListing', listing);
       }}
       image = {listing.image}

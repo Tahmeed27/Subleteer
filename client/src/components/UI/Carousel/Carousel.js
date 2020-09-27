@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 
-import Image from "../../../assets/181.jpg";
-
 const Images = (props) => {
   const [index, setIndex] = useState(0);
 
@@ -27,9 +25,9 @@ const Images = (props) => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={Image}
-          alt={"Hello"}
-          style={{ borderRadius: "20px" }}
+          src={`http://localhost:5000/${props.image}`}
+          alt={props.title}
+          style={{ borderRadius: "20px"}}
         />
       </Carousel.Item>
     </Carousel>

@@ -70,9 +70,6 @@ const Profile = (props) => {
                                 alt="profile"
                                 style={{ height: '200px', width: '200px' }}
                             />
-                            {/* <div className={classes.ProfilePicture}>
-                                <img src={`http://localhost:5000/${props.userImage}`} alt="profile"/>
-                            </div> */}
                             <p className={classes.Greetings}>Hi, <span style={{fontWeight:"bold"}}>{props.username}</span></p>
                         </div>
                        
