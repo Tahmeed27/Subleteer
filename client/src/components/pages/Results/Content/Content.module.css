@@ -3,4 +3,12 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 20px;
 }
+
+@media screen and (max-width: 1200px){
+  .Container{
+    width: 100%;
+  }
+}
+

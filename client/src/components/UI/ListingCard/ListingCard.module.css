@@ -11,6 +11,17 @@
   border-radius: 10px;
 }
 
+
+@media screen and (max-width: 1200px){
+  .ListingTile{
+    width: 100%;
+    margin: 5px 0;
+    height: auto;
+    flex-direction: column;
+  }
+}
+
+
 .ListingTile:hover{
   cursor: pointer;
   box-shadow: 0px 0px 4px 4px lightgrey;
@@ -22,6 +33,14 @@
   border-radius: 20px;
   margin-right: 20px;
   margin-left: 20px;
+}
+
+@media screen and (max-width: 1200px){
+  .ImgContainer{
+    width: 100%;
+    margin: 5px 0;
+    height: auto;
+  }
 }
 
 .ImgContainer img {
@@ -45,6 +64,19 @@
   text-align: start;
 }
 
+@media screen and (max-width: 1200px){
+  .ContentWrapper{
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .Content{
+    text-align: center;
+  }
+}
+
 .Row{
   display: flex;
   justify-content: space-between;
@@ -59,6 +91,20 @@
   background-color: orange;
   border-radius: 10px;
   border: 1px solid black;
+}
+
+@media screen and (max-width: 1200px){
+  .Row{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+
+  .Row button{
+    width: 50%;
+
+  }
 }
 
 .Row button:hover{
@@ -84,6 +130,16 @@
   margin-top: 10px; 
 }
 
+@media screen and (max-width: 1200px){
+  .Footer{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 10px;
+    margin-bottom: 20px;
+  }
+}
+
 .Feature{
   display: flex;
   margin-right: 50px;
@@ -96,5 +152,4 @@
 .Button{
   width: 5%;
   height: 50px;
-  background-color: red;
 }

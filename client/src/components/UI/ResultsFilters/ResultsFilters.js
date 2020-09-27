@@ -78,48 +78,58 @@ const ResultsFilters = (props) => {
 
     return (
         <div className={classes.FilterSection}>
-            <h4>Max Rent</h4>
-            <br/>
-            <div style={{width:"80%", margin: "10px 20px"}}>
-                <ThemeProvider theme={muiTheme}>
-                    <Slider
-                        defaultValue={500}
-                        getAriaValueText={handlePriceChange}
-                        aria-labelledby="discrete-slider-always"
-                        step={100}
-                        marks={RentMarks}
-                        max={3000}
-                        min={100}
-                        valueLabelDisplay="on"
-                    />
-                </ThemeProvider>
+
+            <div className={classes.FilterDiv}>
+                <h4>Max Rent</h4>
+                <br/>
+                <div style={{width:"80%", margin: "10px 20px"}}>
+                    <ThemeProvider theme={muiTheme}>
+                        <Slider
+                            defaultValue={500}
+                            getAriaValueText={handlePriceChange}
+                            aria-labelledby="discrete-slider-always"
+                            step={100}
+                            marks={RentMarks}
+                            max={3000}
+                            min={100}
+                            valueLabelDisplay="on"
+                        />
+                    </ThemeProvider>
+                </div>
             </div>
-            <h4>Bedrooms</h4>
-            <br/>
-            <div style={{width:"80%", margin: "10px 20px"}}>
-                <ThemeProvider theme={muiTheme}>
-                    <Slider
-                        defaultValue={2}
-                        getAriaValueText={handleBedroomChange}
-                        aria-labelledby="discrete-slider-always"
-                        step={1}
-                        marks={BedroomMarks}
-                        max={10}
-                        min={1}
-                        valueLabelDisplay="on"
-                    />
-                </ThemeProvider>
+            
+            <div className={classes.FilterDiv}>
+                <h4>Bedrooms</h4>
+                <br/>
+                <div style={{width:"80%", margin: "10px 20px"}}>
+                    <ThemeProvider theme={muiTheme}>
+                        <Slider
+                            defaultValue={2}
+                            getAriaValueText={handleBedroomChange}
+                            aria-labelledby="discrete-slider-always"
+                            step={1}
+                            marks={BedroomMarks}
+                            max={10}
+                            min={1}
+                            valueLabelDisplay="on"
+                        />
+                    </ThemeProvider>
+                </div>
             </div>
-            <h4>Gender</h4>
-            <div style={{marginLeft: "20px"}}>
-                <FormControl component="fieldset">
-                    <RadioGroup aria-label="Bedrooms" name="bedroom" value={gender} onChange={handleGenderChange}>
-                        <FormControlLabel value="male" control={<Radio />} label="Male only" />
-                        <FormControlLabel value="female" control={<Radio />} label="Female only" />
-                        <FormControlLabel value="any" control={<Radio/>} label="Co-ed" />
-                    </RadioGroup>
-                </FormControl>
+            
+            <div className={classes.FilterDiv}>
+                <h4>Gender</h4>
+                <div style={{marginLeft: "20px"}}>
+                    <FormControl component="fieldset">
+                        <RadioGroup aria-label="Bedrooms" name="bedroom" value={gender} onChange={handleGenderChange}>
+                            <FormControlLabel value="male" control={<Radio />} label="Male only" />
+                            <FormControlLabel value="female" control={<Radio />} label="Female only" />
+                            <FormControlLabel value="any" control={<Radio/>} label="Co-ed" />
+                        </RadioGroup>
+                    </FormControl>
+                </div>
             </div>
+            
             <button 
                 className={classes.SearchButton}
                 onClick = {handleSearchFilters}

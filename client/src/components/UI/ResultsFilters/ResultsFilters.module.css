@@ -13,6 +13,25 @@
     box-sizing: border-box;
 }
 
+@media screen and (max-width: 1200px){
+    .FilterSection {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      height: auto;
+      margin: auto auto;
+      margin-bottom: 50px;
+      padding-bottom: 10px;
+    }
+
+    .FilterDiv{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
 .FilterSection h4{
     margin-left: 20px;
 }
