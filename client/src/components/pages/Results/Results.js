@@ -10,6 +10,7 @@ import Content from "./Content/Content";
 import { faFrownOpen} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as actions from "../../../store/actions";
+import Footer from '../../UI/Footer/Footer';
 
 const Results = (props) => {
   const { getListings } = props;
@@ -38,7 +39,7 @@ const Results = (props) => {
     <div className={classes.NoListings}>
       <FontAwesomeIcon icon={faFrownOpen} size="10x" className={classes.Icon}/>
       <h1>Uh Oh!</h1>
-      <h2>Looks like no one is subletting with these requirements yet, check again later.</h2>
+      <h2>Looks like no one is subletting with these requirements yet. Check again later.</h2>
     </div>
   );
 
@@ -67,6 +68,7 @@ const Results = (props) => {
               <p className={classes.Logout} onClick={props.logout}>Logout</p>
           </div> : <div/>}
       </div>
+      
       <div className={classes.Container}>
         <FilterSection address ={searchAddress}/>
         <div className={classes.Content}>
@@ -77,6 +79,7 @@ const Results = (props) => {
           }
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

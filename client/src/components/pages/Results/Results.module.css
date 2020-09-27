@@ -6,6 +6,7 @@
   height: 100px;
   box-shadow:  0px 4px 2px -2px lightgrey;
   margin-bottom: 50px;
+  width: 100%;
 }
 
 .NavBar .ProfilePicture{
@@ -52,10 +53,15 @@
 }
 
 .Content {
-  background-color: white;
   width: 80%;
   margin: 0 auto;
   text-align: start;
+}
+
+@media screen and (max-width: 1200px){
+  .Content {
+    width: 90%;
+  }
 }
 
 .ResultsHeader{
@@ -65,6 +71,13 @@
 .Container {
   text-align: center;
   display: flex;
+}
+
+@media screen and (max-width: 1200px){
+  .Container {
+    flex-direction: column;
+    margin: 0;
+  }
 }
 
 .NoListings{
@@ -87,4 +100,11 @@
   text-align: center;
   width: 80%;
   line-height: 40px;
+}
+
+@media screen and (max-width: 1200px){
+  .NoListings{
+    width: 90%;
+    margin: 50px auto;
+  }
 }
