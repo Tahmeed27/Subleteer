@@ -94,6 +94,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getListings: (address) => dispatch(actions.getListingsByAddress(address)),
+    logout: () => dispatch(actions.logout()),
   };
 };
 
