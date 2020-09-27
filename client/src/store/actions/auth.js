@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
+// import { Redirect } from "react-router-dom"
 
 
 export const authAddImage = (imageURL) => {
@@ -40,6 +41,7 @@ export const logout = () => {
   localStorage.removeItem("username");
   localStorage.removeItem("email");
   localStorage.removeItem("userImage");
+  // <Redirect to="/" />
   return {
     type: actionTypes.AUTH_LOGOUT,
   };

@@ -13,20 +13,20 @@ import { Typography, TextField, Grid, Paper, MenuItem, Button } from '@material-
 
 const UpdateListings = (props) => {
     const handleSubmit = () => {
-        console.log("Sending this to server: ", eachEntry)
+        
         const url = 'http://localhost:5000/api/listings'
 
         const formData = new FormData();
-
+        console.log(eachEntry.image);
         formData.append('title', eachEntry.title);
-        formData.append('price', eachEntry.price);
+        formData.append('price', eachEntry.price.toString());
         formData.append('gender', eachEntry.gender);
-        formData.append('bedrooms', eachEntry.bedrooms);
-        formData.append('bathrooms', eachEntry.bathrooms);
+        formData.append('bedrooms', eachEntry.bedrooms.toString());
+        formData.append('bathrooms', eachEntry.bathrooms.toString());
         formData.append('image', eachEntry.image);
         formData.append('description', eachEntry.description);
-        formData.append('listingID', listing._id);
-        formData.append('userID', props.userID);
+        formData.append('listingID', listing._id.toString());
+        formData.append('userID', props.userID.toString());
 
         axios({
             method: "PATCH",
@@ -35,8 +35,8 @@ const UpdateListings = (props) => {
             headers: {'Content-Type': 'multipart/form-data' }
           })
           .then((response) => {
-              history.push('/profile')
-            //console.log(response);
+                history.push('/profile')
+                console.log(response);
           })
           .catch((error) => {
             console.log(error);

@@ -49,6 +49,7 @@ const ImagePicker = (props) => {
             fileIsValid = false;
         }
         if(fileIsValid){
+            console.log(pickedFile);
             props.onInput(pickedFile);
         }
     }
@@ -75,7 +76,9 @@ const ImagePicker = (props) => {
                 onChange={pickedHandler}
             />
             <Avatar alt="Preview" src={previewURL} className={classes.Avatar} style={{ height: '100px', width: '100px' }}>
-                <img className={classes.FallBackImage} src={`http://localhost:5000/${props.image}`} alt="Picture"/>
+               { props.image ? 
+                    <img className={classes.FallBackImage} src={`http://localhost:5000/${props.image}`} alt="Picture"/>
+                : null}
             </Avatar>
             <button type="button" onClick={pickImageHandler}>Pick Image</button>
         </div>
