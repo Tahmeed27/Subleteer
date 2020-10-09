@@ -25,7 +25,7 @@ const Images = (props) => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={`http://localhost:5000/${props.image}`}
+          src={`/${props.image}`}
           alt={props.title}
           style={{ borderRadius: "20px"}}
         />

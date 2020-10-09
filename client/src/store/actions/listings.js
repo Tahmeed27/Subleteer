@@ -22,7 +22,7 @@ export const getListingsByFilter = (price, bedrooms, gender, address) => {
     let filterData = { price, bedrooms, gender, address };
     console.log(price,bedrooms, gender, address );
     
-    const url = "http://localhost:5000/api/listings/filters";
+    const url = "/api/listings/filters";
     axios
       .post(url, filterData)
       .then((response) => {
@@ -58,7 +58,7 @@ export const getListingsByUserIDFail = error => {
 
 export const getListingsByUserID = (userID) => {
   return dispatch => {
-    const url = "http://localhost:5000/api/listings/"+userID
+    const url = "/api/listings/"+userID
     axios.get(url)
     .then(response => {
       dispatch(getListingsByUserIDSuccess(response.data.listings))
@@ -85,7 +85,7 @@ export const getListingsByAddressFail = (error) => {
 export const getListingsByAddress = (address) => {
   return (dispatch) => {
     dispatch(getListingsByAddressStart);
-    const url = "http://localhost:5000/api/listings/address";
+    const url = "/api/listings/address";
     axios
       .post(url, { address: address })
       .then((res) => {

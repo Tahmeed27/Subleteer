@@ -27,7 +27,7 @@ const ListingPage = (props) => {
               <>
                 <div onClick={() => {history.push('/profile')}} className={classes.NavBarProfileDiv}>
                   <Avatar 
-                      src={`http://localhost:5000/${imageLocalStorage}`} 
+                      src={`/${imageLocalStorage}`} 
                       alt="profile"
                       style={{ height: '50px', width: '50px', marginRight: "20px"}}
                   />            

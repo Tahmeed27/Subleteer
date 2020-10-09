@@ -14,7 +14,7 @@ import { Typography, TextField, Grid, Paper, MenuItem, Button } from '@material-
 const UpdateListings = (props) => {
     const handleSubmit = () => {
         
-        const url = 'http://localhost:5000/api/listings'
+        const url = '/api/listings'
 
         const formData = new FormData();
         console.log(eachEntry.image);

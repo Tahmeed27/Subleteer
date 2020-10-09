@@ -81,9 +81,9 @@ export const auth = (email, password, isSignup, username = null, image = null) =
       formData.append("image", image);
     }
       
-    let url = "http://localhost:5000/api/users/signup";
+    let url = "/api/users/signup";
     if (!isSignup) {
-      url = "http://localhost:5000/api/users/login";
+      url = "/api/users/login";
     }
     
     if(!isSignup){

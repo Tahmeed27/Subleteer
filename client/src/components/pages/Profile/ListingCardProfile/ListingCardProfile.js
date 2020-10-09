@@ -5,7 +5,7 @@ const ListingCardProfile = (props) => {
     return (
         <div className={classes.ListingCard} >
            <div className={classes.ImageDiv}>
-               <img src={`http://localhost:5000/${props.listing.image}`}/>
+               <img src={`/${props.listing.image}`}/>
            </div>
            <div className={classes.Content}>
                 <h2>{props.listing.title}</h2>

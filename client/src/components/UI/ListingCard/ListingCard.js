@@ -12,7 +12,7 @@ const ListingCard = (props) => {
     <div className={classes.ListingTile} onClick={props.onClick}>
       <div className={classes.ImgContainer}>
         <img 
-          src={`http://localhost:5000/${props.image}`} 
+          src={`/${props.image}`} 
           alt="container" 
         />
       </div>

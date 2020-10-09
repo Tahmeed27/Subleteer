@@ -15,7 +15,7 @@ const AddListing = (props) => {
 
     const handleSubmit = () => {
         console.log("Sending this to server: ", eachEntry)
-        const url = 'http://localhost:5000/api/listings'
+        const url = '/api/listings'
 
         const formData = new FormData();
 

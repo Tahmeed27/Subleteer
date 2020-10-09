@@ -53,7 +53,7 @@ const Profile = (props) => {
                 </div>
                 <div className={classes.NavBarOptions}>
                     <Avatar 
-                        src={`http://localhost:5000/${imageLocalStorage}`} 
+                        src={`/${imageLocalStorage}`} 
                         alt="profile"
                         style={{ height: '50px', width: '50px', marginRight: "20px"}}
                     />
@@ -66,7 +66,7 @@ const Profile = (props) => {
                     <div className={classes.UserInfo}>
                         <div className={classes.DPWrapper}>
                             <Avatar 
-                                src={`http://localhost:5000/${imageLocalStorage}`} 
+                                src={`/${imageLocalStorage}`} 
                                 alt="profile"
                                 style={{ height: '200px', width: '200px' }}
                             />

@@ -51,5 +51,7 @@
   "description": "",
   "devDependencies": {
     "eslint-plugin-react": "^7.20.6"
-  }
+  },
+  "proxy": "http://localhost:5000"
+
 }
