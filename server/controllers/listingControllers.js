@@ -241,6 +241,7 @@ const updateListing = async (req, res, next) => {
     const {title, bedrooms, price, 
         gender, bathrooms, description, listingID} = req.body;
 
+    //console.log(req);
     const image = req.file.path;
 
     let listing;
