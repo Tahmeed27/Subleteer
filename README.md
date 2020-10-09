@@ -1,9 +1,9 @@
 Subleteer: Case Study
 =======
 
-Tech Stack: React, NodeJS, ExpressJS, MongoDB
-Team members: Tahmeed Mostafiz, Omar Baranek, Dhruv Mittal
-Demo: https://youtu.be/mSQwBNV6N94
+Tech Stack: React, NodeJS, ExpressJS, MongoDB  
+Team members: Tahmeed Mostafiz, Omar Baranek, Dhruv Mittal  
+Demo: https://youtu.be/mSQwBNV6N94  
 
 Inspiration
 -----------
