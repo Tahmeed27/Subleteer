@@ -1,4 +1,5 @@
 Inspiration
+=======
 Students are always stressing about finding housing. I personally had a very bad experience moving into my first apartment as it was incredibly difficult to find suitable apartments for a good price. Currently, students have to join different Facebook groups to look for sublets in different cities. Not only that, there is no way to filter through the group based on criteria or preferences. This lead us to make a platform that can make selling and getting sublets much easier
 
 What it does
